@@ -1,0 +1,10 @@
+version: "3.7"
+
+services:
+    web:
+        build: .
+        command: gunicorn server.wsgi:application --bind 0.0.0.0:8000 --workers 4
+        volumes:
+            - .:/code
+        ports:
+            - "80:8000"
