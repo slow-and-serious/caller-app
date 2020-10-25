@@ -51,17 +51,6 @@ function Header() {
               Pat shop
             </Link>
           </Typography>
-          <nav>
-            <Link
-              color="textPrimary"
-              href="#"
-              className={classes.link}
-              component={NavLink}
-              to="/register"
-            >
-              Register
-            </Link>
-          </nav>
           <Button
             href="#"
             color="primary"
