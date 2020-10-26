@@ -17,11 +17,26 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
 from rest_framework_simplejwt import views as jwt_views
+from users.views import token_blacklist
 
 urlpatterns = [
+
+    # React frontend
     path('', TemplateView.as_view(template_name='index.html')),
+
+    # Admin page
     path('admin/', admin.site.urls),
+
+    # Auth for browsable API
     path('api-auth/', include('rest_framework.urls')),
-    path('api/v1/token', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/v1/token/refresh', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+
+    # JWT auth
+    path('api/v1/token', jwt_views.TokenObtainPairView.as_view(),
+         name='token_obtain_pair'),
+    path('api/v1/token/refresh',
+         jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/v1/logout/blacklist', token_blacklist, name='blacklist'),
+
+    # Notifications
+    path('api/v1/', include('notifications.urls')),
 ]
