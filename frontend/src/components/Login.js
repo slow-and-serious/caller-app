@@ -1,19 +1,15 @@
-import React, { useState } from "react";
-import axiosInstance from "../axios";
-import { useHistory } from "react-router-dom";
 import {
   Avatar,
   Button,
+  Container,
   CssBaseline,
   TextField,
-  FormControlLabel,
-  Checkbox,
-  Link,
-  Grid,
   Typography,
-  Container,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import axiosInstance from "../services/axios";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -66,7 +62,7 @@ export default function SignIn() {
         axiosInstance.defaults.headers["Authorization"] =
           "JWT " + sessionStorage.getItem("access_token");
       })
-        .then(() => history.push("/"));
+      .then(() => (window.location.href = "/"));
   };
 
   const classes = useStyles();
@@ -104,10 +100,6 @@ export default function SignIn() {
             autoComplete="current-password"
             onChange={handleChange}
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
           <Button
             type="submit"
             fullWidth
@@ -118,18 +110,6 @@ export default function SignIn() {
           >
             Sign In
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
         </form>
       </div>
     </Container>
