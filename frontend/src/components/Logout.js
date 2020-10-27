@@ -6,11 +6,11 @@ export default function SignUp() {
   const history = useHistory();
 
   useEffect(() => {
-    const response = axiosInstance.post("logout/blacklist", {
-      refresh_token: localStorage.getItem("refresh_token"),
+    axiosInstance.post("logout/blacklist", {
+      refresh_token: sessionStorage.getItem("refresh_token"),
     });
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("refresh_token");
+    sessionStorage.removeItem("access_token");
+    sessionStorage.removeItem("refresh_token");
     axiosInstance.defaults.headers["Authorization"] = null;
     history.push("/login");
   });

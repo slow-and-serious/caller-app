@@ -11,13 +11,15 @@
     - `poetry install` to install dependencies
     - create .env file with listed <a href="#env">below</a> variables and save it into 'server' directory
     - `python manage.py runserver` - to run server
-- navigate to the `frontend` directory and run `npm run start` or `yarn start`
+- navigate to the `frontend` directory and run:
+    - `yarn install` to install node dependencies
+    - `yarn start` to start development server
 Now you have the back end running on `localhost:8000` and the front end running on `localhost:3000`
 
 
 ### Production (using Docker)
-- make sure that you have 
-- `docker-compose up --build -d` to run the server, then navigate to `localhost`
+- navigate to the `frontend` directory and run `yarn build`
+- navigate to the root and run `docker-compose up --build -d` to run the server, then navigate to `localhost` in your browser
 
 If you're having troubles with installing `psycopg2` try this solution (for Mac users):  
 `brew install openssl`  
@@ -35,6 +37,14 @@ DB_PASS=DB password(see slack)
 DB_HOST=DB host (see slack)  
 DB_PORT=DB port(see slack)  
 CORS_ALLOWED_ORIGINS=make sure to include `http://localhost:3000,http://localhost` 
+
+
+## Credentials
+|       Email         |    Password   |   Role    |
+|:-------------------:|:-------------:|:---------:|
+| admin@company.com   |  test12345    | superuser |
+| manager@company.com |  test12345    | staff     |
+
 
 ## API:
 

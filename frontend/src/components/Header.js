@@ -48,20 +48,9 @@ function Header() {
               underline="none"
               color="textPrimary"
             >
-              Pat shop
+              Caller App
             </Link>
           </Typography>
-          <nav>
-            <Link
-              color="textPrimary"
-              href="#"
-              className={classes.link}
-              component={NavLink}
-              to="/register"
-            >
-              Register
-            </Link>
-          </nav>
           <Button
             href="#"
             color="primary"
