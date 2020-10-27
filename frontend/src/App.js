@@ -17,7 +17,7 @@ function App() {
 			setAppState({ loading: false, items: allItems });
 			console.log(res.data);
 		});
-	}, [setAppState]);
+	}, []);
 	return (
 		<div className="App">
 			<h1>Items</h1>
