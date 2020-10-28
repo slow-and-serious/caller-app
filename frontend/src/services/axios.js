@@ -22,7 +22,7 @@ axiosInstance.interceptors.response.use(
     const originalRequest = error.config;
 
     if (typeof error.response === "undefined") {
-      alert("Unknown error");
+      console.log("Unknown error");
       return Promise.reject(error);
     }
     if (
