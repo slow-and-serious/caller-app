@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
     # My apps
     'users.apps.UsersConfig',
+    'notifications.apps.NotificationsConfig',
 
     # 3rd party app
     'rest_framework',
