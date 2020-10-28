@@ -85,7 +85,7 @@ export default function Login() {
             window.location.reload();
           })
           .catch((err) => {
-            setErrorMessage("Login failed");
+            setErrorMessage("The email and password do not match our records");
           });
         setTimeout(() => {
           setSubmitting(false);
