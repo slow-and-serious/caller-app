@@ -22,11 +22,7 @@ axiosInstance.interceptors.response.use(
     const originalRequest = error.config;
 
     if (typeof error.response === "undefined") {
-      alert(
-        "A server/network error occurred. " +
-          "Looks like CORS might be the problem. " +
-          "Sorry about this - we will get it fixed shortly."
-      );
+      alert("Unknown error");
       return Promise.reject(error);
     }
     if (
@@ -62,6 +58,7 @@ axiosInstance.interceptors.response.use(
                 "JWT " + response.data.access;
               originalRequest.headers["Authorization"] =
                 "JWT " + response.data.access;
+              window.location.reload();
 
               return axiosInstance(originalRequest);
             })

@@ -40,6 +40,10 @@ export default function SignIn() {
 
   const [formData, updateFormData] = useState(initialFormData);
 
+  const validate = () => {
+
+  }
+
   const handleChange = (e) => {
     updateFormData({
       ...formData,
@@ -62,7 +66,10 @@ export default function SignIn() {
         axiosInstance.defaults.headers["Authorization"] =
           "JWT " + sessionStorage.getItem("access_token");
       })
-      .then(() => (window.location.href = "/"));
+      .then(() => {
+        history.push("/");
+        window.location.reload();
+      });
   };
 
   const classes = useStyles();
@@ -87,6 +94,8 @@ export default function SignIn() {
             autoComplete="email"
             autoFocus
             onChange={handleChange}
+            error
+            helperText="required"
           />
           <TextField
             variant="outlined"
