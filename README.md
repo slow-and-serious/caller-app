@@ -40,10 +40,10 @@ CORS_ALLOWED_ORIGINS=make sure to include `http://localhost:3000,http://localhos
 
 
 ## Credentials
-|       Email         |    Password    |   Role    |
-|:-------------------:|:--------------:|:---------:|
-| admin@company.com   |  test123456    | superuser |
-| manager@company.com |  test123456    | staff     |
+|        Email        |  Password  |   Role    |
+| :-----------------: | :--------: | :-------: |
+|  admin@company.com  | test123456 | superuser |
+| manager@company.com | test123456 |   staff   |
 
 
 ## API:
