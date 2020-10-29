@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
     # My apps
     'users.apps.UsersConfig',
+    'notifications.apps.NotificationsConfig',
 
     # 3rd party app
     'rest_framework',
@@ -143,7 +144,8 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
-    ]
+    ],
+
 }
 
 # Custom user
@@ -199,3 +201,9 @@ STATICFILES_DIRS = ['frontend/build/static']
 
 # CORS allowed hosts
 CORS_ALLOWED_ORIGINS = tuple(env.list('CORS_ALLOWED_ORIGINS'))
+
+#Variables for twilio
+TWILIO_SID = env("TWILIO_SID")
+TWILIO_AUTH = env("TWILIO_AUTH")
+TWILIO_NUMBER = env("TWILIO_NUMBER")
+DEPLOYED_URL = env("DEPLOYED_URL")
