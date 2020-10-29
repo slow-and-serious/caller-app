@@ -3,6 +3,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from twilio.twiml.voice_response import VoiceResponse, Gather, Say
+from urllib.parse import urlencode
 # Create your views here.
 
 
@@ -12,43 +13,44 @@ def home(request):
 
     # #lets build some twiML
     resp = VoiceResponse()
-
-    # resp.append(Say(message=request.query_params["message"]))
-
+    message = request.query_params["message"]
+    message_par = urlencode({"message": message})
+    print(message_par)
     # start the gather verb
-    gather = Gather(num_digits=1, action="/user_response")
-    gather.say(request.query_params["message"])
+    gather = Gather(num_digits=1, action=f"maketwiml/user_response?{message_par}")
+    gather.say(message)
     resp.append(gather)
 
-#     output = """<?xml version="1.0" encoding="UTF-8"?><Response>
-# <Say voice="alice">Thanks for trying our documentation. Enjoy!</Say>
-# <Play>http://demo.twilio.com/docs/classic.mp3</Play>
-# </Response>"""
-
-    print(request.query_params["message"])
+    print("base route message: ", request.query_params["message"])
     return HttpResponse(str(resp), content_type="text/xml")
 
 
 @api_view(["GET", "POST"])
 def user_response(request):
+    message = request.query_params["message"]
+    message = urlencode({"message": message})
+
+    print("user_response route message: ", message)
     resp = VoiceResponse()
     # If Twilio's request to our app included already gathered digits,
     # process them
-    if 'Digits' in request.values:
-        # Get which digit the caller chose
-        choice = request.values['Digits']
-
+    called_num = request.POST["To"]
+    choice = request.POST["Digits"]
+    twilio_call_sid = request.POST["CallSid"]
+    if len(choice):
         # <Say> a different message depending on the caller's choice
         if choice == '1':
-            resp.say('You selected sales. Good for you!')
+            resp.say('You have accepted, we have been notified and will be contacting you soon. Thank you')
+            print("code for acceptance goes here")
             return HttpResponse(str(resp), content_type="text/xml")
         elif choice == '2':
-            resp.say('You need support. We will help!')
+            resp.say('You have rejected, we have been notified. Thank you')
+            print("code for rejection goes here")
             return HttpResponse(str(resp), content_type="text/xml")
         else:
             # If the caller didn't choose 1 or 2, apologize and ask them again
             resp.say("Sorry, I don't understand that choice.")
 
-    # If the user didn't choose 1 or 2 (or anything), send them back to /voice
-    resp.redirect('/voice')
+    # If the user didn't choose 1 or 2 (or anything), send them back to the prompt
+    resp.redirect(f'/twilio/maketwiml?{message}')
     return HttpResponse(str(resp), content_type="text/xml")
