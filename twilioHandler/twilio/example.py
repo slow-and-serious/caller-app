@@ -20,4 +20,4 @@ def make_call(call_num, message):
 
 
 if __name__ == "__main__":
-    make_call("+14253501717", "I do so enjoy these talks.")
+    make_call("+14253501717", "Hello. This is an automated caller. Would you work a shift Today 10/28 Press 1 for yes and 2 for no")
