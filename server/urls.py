@@ -16,8 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
+from django_otp.admin import OTPAdminSite
 from rest_framework_simplejwt import views as jwt_views
+
 from users.views import token_blacklist
+
+# Replacing default Admin Site with OTP Admin Site
+otp_admin_site = OTPAdminSite(OTPAdminSite.name)
+for model_cls, model_admin in admin.site._registry.items():
+    otp_admin_site.register(model_cls, model_admin.__class__)
 
 urlpatterns = [
 
@@ -25,7 +32,8 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html')),
 
     # Admin page
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls), # Old admin without 2FA
+    path('admin/', otp_admin_site.urls, name='admin'),
 
     # Auth for browsable API
     path('api-auth/', include('rest_framework.urls')),
@@ -39,7 +47,7 @@ urlpatterns = [
 
     # Notifications
     path('api/v1/', include('notifications.urls')),
-    
-    #Twilio
+
+    # Twilio
     path('twilio/maketwiml', include('twilioHandler.urls'))
 ]
