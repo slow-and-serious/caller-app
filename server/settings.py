@@ -56,6 +56,12 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
     'whitenoise.runserver_nostatic',
+
+    # 2FA
+    'django_otp',
+    'django_otp.plugins.otp_totp',
+    'django_otp.plugins.otp_hotp',
+    'django_otp.plugins.otp_static',
 ]
 
 MIDDLEWARE = [
@@ -70,6 +76,10 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+
+    # 2FA
+    'django_otp.middleware.OTPMiddleware',
+
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
@@ -109,7 +119,6 @@ DATABASES = {
         'PORT': env('DB_PORT'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -202,7 +211,7 @@ STATICFILES_DIRS = ['frontend/build/static']
 # CORS allowed hosts
 CORS_ALLOWED_ORIGINS = tuple(env.list('CORS_ALLOWED_ORIGINS'))
 
-#Variables for twilio
+# Variables for twilio
 TWILIO_SID = env("TWILIO_SID")
 TWILIO_AUTH = env("TWILIO_AUTH")
 TWILIO_NUMBER = env("TWILIO_NUMBER")

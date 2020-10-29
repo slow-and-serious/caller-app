@@ -11,7 +11,7 @@ class CustomUserAdmin(UserAdmin):
     form = UserUpdateForm
     model = CustomUser
     list_display = ['email', 'first_name', 'last_name']
-    
+
     fieldsets = (
         (None, {'fields': ('email', 'first_name', 'last_name', 'password')}),
         ('Permissions', {'fields': ('is_staff', 'is_active')}),
