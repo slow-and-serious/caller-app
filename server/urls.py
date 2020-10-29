@@ -39,4 +39,7 @@ urlpatterns = [
 
     # Notifications
     path('api/v1/', include('notifications.urls')),
+    
+    #Twilio
+    path('twilio/maketwiml', include('twilioHandler.urls'))
 ]
