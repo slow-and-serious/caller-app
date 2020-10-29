@@ -22,14 +22,9 @@ axiosInstance.interceptors.response.use(
     const originalRequest = error.config;
 
     if (typeof error.response === "undefined") {
-      alert(
-        "A server/network error occurred. " +
-          "Looks like CORS might be the problem. " +
-          "Sorry about this - we will get it fixed shortly."
-      );
+      console.log("Unknown error");
       return Promise.reject(error);
     }
-
     if (
       error.response.status === 401 &&
       originalRequest.url === baseURL + "token/refresh"
@@ -50,7 +45,7 @@ axiosInstance.interceptors.response.use(
 
         // exp date in token is expressed in seconds, while now() returns milliseconds:
         const now = Math.ceil(Date.now() / 1000);
-        console.log(tokenParts.exp);
+        console.log(refreshToken);
 
         if (tokenParts.exp > now) {
           return axiosInstance
@@ -63,6 +58,7 @@ axiosInstance.interceptors.response.use(
                 "JWT " + response.data.access;
               originalRequest.headers["Authorization"] =
                 "JWT " + response.data.access;
+              window.location.reload();
 
               return axiosInstance(originalRequest);
             })

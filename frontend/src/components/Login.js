@@ -1,19 +1,23 @@
-import React, { useState } from "react";
-import axiosInstance from "../axios";
-import { useHistory } from "react-router-dom";
 import {
   Avatar,
   Button,
-  CssBaseline,
-  TextField,
-  FormControlLabel,
-  Checkbox,
-  Link,
-  Grid,
-  Typography,
   Container,
+  CssBaseline,
+  LinearProgress,
+  Typography,
 } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 import { makeStyles } from "@material-ui/core/styles";
+import { Field, Form, Formik } from "formik";
+import { TextField } from "formik-material-ui";
+import React, { useState } from "react";
+import axiosInstance from "../services/axios";
+import { useHistory } from "react-router-dom";
+
+interface Values {
+  email: string;
+  password: string;
+}
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -35,103 +39,106 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
-  const history = useHistory();
-  const initialFormData = Object.freeze({
-    email: "",
-    password: "",
-  });
-
-  const [formData, updateFormData] = useState(initialFormData);
-
-  const handleChange = (e) => {
-    updateFormData({
-      ...formData,
-      [e.target.name]: e.target.value.trim(),
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-
-    axiosInstance
-      .post(`token`, {
-        email: formData.email,
-        password: formData.password,
-      })
-      .then((res) => {
-        sessionStorage.setItem("access_token", res.data.access);
-        sessionStorage.setItem("refresh_token", res.data.refresh);
-        axiosInstance.defaults.headers["Authorization"] =
-          "JWT " + sessionStorage.getItem("access_token");
-      })
-        .then(() => history.push("/"));
-  };
-
+export default function Login() {
   const classes = useStyles();
+  const history = useHistory();
+  const [errorMessage, setErrorMessage] = useState("");
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}></Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form className={classes.form} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            onChange={handleChange}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            onChange={handleChange}
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={handleSubmit}
-          >
-            Sign In
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-    </Container>
+    <Formik
+      initialValues={{
+        email: "",
+        password: "",
+      }}
+      validate={(values) => {
+        const errors: Partial<Values> = {};
+        if (!values.email) {
+          errors.email = "Required";
+        } else if (
+          !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+        ) {
+          errors.email = "Invalid email address";
+        }
+
+        if (!values.password) {
+          errors.password = "Required";
+        } else if (values.password.length < 4) {
+          errors.password = "Password length must be greater than 4 characters";
+        }
+        return errors;
+      }}
+      onSubmit={(values, { setSubmitting }) => {
+        setErrorMessage("");
+        axiosInstance
+          .post(`token`, {
+            email: values.email,
+            password: values.password,
+          })
+          .then((res) => {
+            sessionStorage.setItem("access_token", res.data.access);
+            sessionStorage.setItem("refresh_token", res.data.refresh);
+            axiosInstance.defaults.headers["Authorization"] =
+              "JWT " + sessionStorage.getItem("access_token");
+          })
+          .then(() => {
+            history.push("/");
+            window.location.reload();
+          })
+          .catch((err) => {
+            setErrorMessage("The email and password do not match our records");
+          });
+        setTimeout(() => {
+          setSubmitting(false);
+        }, 800);
+      }}
+    >
+      {({ submitForm, isSubmitting }) => (
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar}></Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
+            <Form className={classes.form}>
+              <Field
+                component={TextField}
+                name="email"
+                type="email"
+                label="Email Address"
+                variant="outlined"
+                margin="normal"
+                fullWidth
+                autoFocus
+              />
+              <br />
+              <Field
+                component={TextField}
+                type="password"
+                label="Password"
+                name="password"
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+              />
+              {isSubmitting && <LinearProgress />}
+              <br />
+              <Button
+                variant="contained"
+                fullWidth
+                color="primary"
+                className={classes.submit}
+                disabled={isSubmitting}
+                onClick={submitForm}
+              >
+                Submit
+              </Button>
+            </Form>
+          </div>
+        </Container>
+      )}
+    </Formik>
   );
 }
