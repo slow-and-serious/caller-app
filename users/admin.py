@@ -45,5 +45,5 @@ class ProfileAdmin(admin.ModelAdmin):
     # Set current user as the manager
     def save_model(self, request, obj, form, change):
         if not obj.manager:
-            ogj.manager = request.user
+            obj.manager = request.user
         super().save_model(request, obj, form, change)

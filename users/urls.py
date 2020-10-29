@@ -1,7 +1,7 @@
 from django.urls import path
 from rest_framework_simplejwt import views as jwt_views
 
-from .views import token_blacklist, profile
+from .views import token_blacklist, profile, user_list
 
 urlpatterns = [
     # JWT auth
@@ -12,5 +12,6 @@ urlpatterns = [
     path('logout/blacklist', token_blacklist, name='blacklist'),
     
     
-    path('profile/<int:pk>', profile, name='profile'),
+    path('profile', profile, name='profile'),
+    path('list', user_list, name='list'),
 ]

@@ -5,13 +5,14 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from .models import CustomUser, Profile
-from .serializers import ProfileSerializer
-from .permissions import IsOwner
+from .serializers import ProfileSerializer, UserSerializer
 
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def token_blacklist(request):
+    """Blacklist the given refresh token
+    """
     try:
         refresh_token = request.data["refresh_token"]
         token = RefreshToken(refresh_token)
@@ -23,14 +24,13 @@ def token_blacklist(request):
 
 
 @api_view(['GET', 'PUT'])
-@permission_classes([IsAuthenticated & (IsAdminUser | IsOwner)])
-def profile(request, pk):
+@permission_classes([IsAuthenticated])
+def profile(request):
     """
     Retrieve or update profile info
     """
     try:
-        user = CustomUser.objects.get(pk=pk)
-        print(user)
+        user = request.user
         profile = user.profile
     except (Profile.DoesNotExist, CustomUser.DoesNotExist):
         return Response(status=status.HTTP_404_NOT_FOUND)
@@ -45,3 +45,18 @@ def profile(request, pk):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'PUT'])
+@permission_classes([IsAuthenticated & IsAdminUser])
+def user_list(request):
+    users = CustomUser.objects.filter(profile__manager=request.user)
+    serialized_users = []
+    
+    for user in users:
+        serialized_profile = ProfileSerializer(user.profile).data
+        serialized_user = UserSerializer(user).data
+        serialized_user.update(serialized_profile)
+        serialized_users.append(serialized_user)
+        
+    return Response(serialized_users, status=status.HTTP_200_OK)
