@@ -12,7 +12,7 @@ class Notification(models.Model):
         ("ACCEPT", "ACCEPT"), ("DECLINE", "DECLINE"), ("NO RESPONSE", "NO RESPONSE"))
     NOTIFICATION_TYPE_CHOICES = (("TEXT", "TEXT"), ("CALL", "CALL"))
 
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, default=1)
     start_date_time = models.DateTimeField(auto_now_add=True)
     end_date_time = models.DateTimeField(auto_now=True)
     message = models.TextField()
