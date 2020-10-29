@@ -38,12 +38,17 @@ DB_HOST=DB host (see slack)
 DB_PORT=DB port(see slack)  
 CORS_ALLOWED_ORIGINS=make sure to include `http://localhost:3000,http://localhost`
 
+## 2FA
+Django admin page is protected by 2 factor authentication. To access this page a user must provide a dynamically generated token that is bound to their trusted device.
+To get the token you will need to use [Google authenticator app](https://support.google.com/accounts/answer/1066447?co=GENIE.Platform%3DAndroid&hl=en)
+
 ## Credentials
-|        Email         | Password  |   Role    |
-| :------------------: | :-------: | :-------: |
-|  admin@company.com   | test12345 | superuser |
-| manager@company.com  | test12345 |   staff   |
-| employee@company.com | test12345 |   user    |
+|        Email         | Password  |   Role    |     Admin page 2FA Barcode   |
+| :------------------: | :-------: | :-------: | :--------------------------: |
+|  admin@company.com   | test12345 | superuser |![admin_qr](./docs/assets/qr_admin.png)|
+| manager@company.com  | test12345 |   staff   |![manager_qr](./docs/assets/qr_manager.png) |
+| employee@company.com | test12345 |   user    | N/A|
+
 
 ## API:
 
