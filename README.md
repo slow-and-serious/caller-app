@@ -55,15 +55,17 @@ To get the token you will need to use [Google authenticator app](https://support
 
 ## API:
 
-`/` - landing page;
+`/` - landing page - serves React frontend app;
 
-`api-auth/` - authorization for browsable API interface;  
+`api-auth/` - authorization for browsable API interface;
+
 `api/v1/user/login` - accepts email and password and returns access and refresh JSON Web Tokens;  
 `api/v1/user/token/refresh` - accepts refresh token and if valid returns new generated access and refresh tokens;  
 `api/v1/user/logout/blacklist` - accepts a refresh token and adds it to black list;  
 `api/v1/user/list` - returns a list of users that have current authenticated user set as their manager. Accepts `GET` request;  
-`api/v1/user/profile` - returns profile information for the authenticated user. Accepts `GET` and `PUT` requests;  
+`api/v1/user/profile` - returns profile information for the authenticated user. Accepts `GET` and `PUT` requests;
 
+`api/v1/start_rotation` - accepts a message via `POST` request from a authenticated user with manager privileges and creates a rotation instance that contains notifications for all manager's employees that allowed notifications;
 
 `admin/` - site admin page;
 
