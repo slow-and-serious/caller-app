@@ -39,7 +39,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
 
     # Notifications
-    path('api/v1/', include('notifications.urls')),
+    path('api/v1/notification/', include('notifications.urls')),
 
     # Twilio
     path('twilio/maketwiml/', include('twilioHandler.urls')),
