@@ -70,7 +70,7 @@ export default function Login() {
       onSubmit={(values, { setSubmitting }) => {
         setErrorMessage("");
         axiosInstance
-          .post(`token`, {
+          .post(`user/login`, {
             email: values.email,
             password: values.password,
           })
