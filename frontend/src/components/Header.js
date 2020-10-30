@@ -43,6 +43,7 @@ function Header() {
 
   const navLinks = [
     { title: `Notification History`, path: `/notification-history` },
+    { title: `Example link`, path: `/` },
   ];
 
   return (
