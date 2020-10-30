@@ -24,6 +24,6 @@ class Notification(models.Model):
         choices=NOTIFICATION_TYPE_CHOICES, max_length=20)
     user_response = models.CharField(
         choices=USER_RESPONSE_CHOICES, max_length=20)
-
+    completed = models.BooleanField(default=False)
     def __str__(self):
         return f'{self.start_date_time},{self.user}'
