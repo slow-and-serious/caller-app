@@ -6,7 +6,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
-import Table from "./components/Table";
+import Notifications from "./components/Notifications";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 
@@ -17,7 +17,7 @@ const routing = (
       <Switch>
         <Route exact path="/" component={App} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/table" component={Table} />
+        <Route exact path="/notification-history" component={Notifications} />
         <Route exact path="/logout" component={Logout} />
       </Switch>
       <Footer />
