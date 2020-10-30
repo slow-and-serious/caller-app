@@ -7,6 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import axiosInstance from '../services/axios'
 
 const useStyles = makeStyles({
   table: {
@@ -17,6 +18,8 @@ const useStyles = makeStyles({
 function createData(id, firstName, lastName, startDateTime, endDateTime, message, notificationType, userResponse) {
   return { id, firstName, lastName, startDateTime, endDateTime, message, notificationType, userResponse };
 }
+axiosInstance.get('notification').then((data)=>console.log(data))
+
 
 const rows = [
   createData('1','Snow', 'Flake',"2020-10-27T04:05:06.717805Z", "2020-10-27T04:05:06.717805Z",'Yes', 'Text', 'Yes-Available to work'),
