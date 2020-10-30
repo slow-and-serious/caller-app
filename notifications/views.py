@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 from rest_framework import generics, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
@@ -7,8 +8,8 @@ from rest_framework.response import Response
 from twilioHandler.twilio.notification_orchestrator import start_rota
 
 from .models import CustomUser, Notification, Rotation
-from .serializers import (NotificationSerializer,
-                          PostSerializer, RotationSerializer)
+from .serializers import (NotificationSerializer, PostSerializer,
+                          RotationSerializer)
 
 
 @api_view(['GET'])
@@ -66,6 +67,18 @@ def rotation_history(request):
                 rotation.notification_set.all())
             serialized_rotations.append(serialized_rotation)
         return Response(serialized_rotations, status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated & IsAdminUser])
+def get_rotation_info(request, rotation_id):
+    rotation = get_object_or_404(Rotation, pk=rotation_id)
+    notifications = rotation.notification_set.all()
+    if len(notifications) > 0:
+        notifications = [NotificationSerializer(
+            notification).data for notification in notifications]
+        return Response(notifications, status=status.HTTP_200_OK)
     return Response(status=status.HTTP_404_NOT_FOUND)
 
 
