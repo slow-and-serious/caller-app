@@ -17,9 +17,6 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
 from django_otp.admin import OTPAdminSite
-from rest_framework_simplejwt import views as jwt_views
-
-from users.views import token_blacklist
 
 # Replacing default Admin Site with OTP Admin Site
 otp_admin_site = OTPAdminSite(OTPAdminSite.name)
@@ -35,19 +32,15 @@ urlpatterns = [
     # path('admin/', admin.site.urls), # Old admin without 2FA
     path('admin/', otp_admin_site.urls, name='admin'),
 
+    # Users
+    path('api/v1/user/', include('users.urls')),
+    
     # Auth for browsable API
     path('api-auth/', include('rest_framework.urls')),
 
-    # JWT auth
-    path('api/v1/token', jwt_views.TokenObtainPairView.as_view(),
-         name='token_obtain_pair'),
-    path('api/v1/token/refresh',
-         jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
-    path('api/v1/logout/blacklist', token_blacklist, name='blacklist'),
-
     # Notifications
-    path('api/v1/', include('notifications.urls')),
+    path('api/v1/notification/', include('notifications.urls')),
 
     # Twilio
-    path('twilio/maketwiml', include('twilioHandler.urls'))
+    path('twilio/maketwiml/', include('twilioHandler.urls')),
 ]

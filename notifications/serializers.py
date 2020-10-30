@@ -8,7 +8,6 @@ class PostSerializer(serializers.ModelSerializer):
         fields = (
             'start_date_time',
             'end_date_time',
-            'message',
             'notification_type',
             'user_response')
         model = Notification

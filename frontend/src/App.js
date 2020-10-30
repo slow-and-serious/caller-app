@@ -12,7 +12,7 @@ function App() {
   });
 
   useEffect(() => {
-    axiosInstance.get().then((res) => {
+    axiosInstance.get("notification/test").then((res) => {
       const allItems = res ? res.data : "Unauthorized";
       setAppState({ loading: false, items: allItems });
     });
