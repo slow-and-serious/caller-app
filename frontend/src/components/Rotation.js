@@ -13,34 +13,30 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Notifications() {
+export default function Rotation() {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(true);
   const classes = useStyles();
 
   const headers = [
     "ID",
-    "Start Date",
-    "End Date",
-    "Your name",
-    "Manager",
-    "Notification Type",
+    "Date",
     "Message",
-    "Response",
+    "Manager",
+    "Number of calls"
   ];
   const Loading = LoadingComponent(BasicTable);
 
   useEffect(() => {
-    axiosInstance.get("notification/notification-history").then((data) => {
-      const rows = data.data.filter(row => row.completed)
-      setRows(rows);
+    axiosInstance.get("notification/rotation-history").then((data) => {
+      setRows(data.data);
       setLoading(false);
     });
   }, []);
 
   return (
     <Container>
-      <Typography variant="h3" className={classes.header}>Notification History</Typography>
+      <Typography variant="h3" className={classes.header}>Rotations</Typography>
       <Loading isLoading={loading} rows={rows} headers={headers} />
     </Container>
   );

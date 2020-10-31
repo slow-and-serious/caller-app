@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
 import Notifications from "./components/Notifications";
+import Rotation from "./components/Rotation";
 
 function App() {
   const [profile, setProfile] = useState({
@@ -36,6 +37,11 @@ function App() {
             exact
             path="/logout"
             component={() => <Logout setLoggedIn={setLoggedIn} />}
+          />
+          <Route
+            exact
+            path="/rotation"
+            component={() => <Rotation loggedIn={loggedIn} profile={profile} />}
           />
         </Switch>
         <Footer />

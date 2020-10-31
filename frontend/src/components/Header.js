@@ -75,7 +75,8 @@ function Header(props) {
       path: `/notification-history`,
       viewableByManager: "False", // This doesn't need to be "false" it can be anything besides "True"
     },
-    { title: `Example link`, path: `/`, viewableByManager: "all" },
+    { title: `Rotation`, path: `/rotation`, viewableByManager: "True" },
+    
   ];
 
   return (

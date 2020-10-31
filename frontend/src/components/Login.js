@@ -87,7 +87,6 @@ export default function Login(props) {
           })
           .then(() => {
             history.push("/");
-            // window.location.reload();
           })
           .catch((err) => {
             setErrorMessage("The email and password do not match our records");
