@@ -47,10 +47,15 @@ export default function Profile() {
     return (
 
         <Formik
-            initialValues={{
-                phoneNumber: "",
-                notify: "",
-            }}
+            // initialValues={(values) => {
+            //     axiosInstance.get("/api/v1/profile")
+            //         .then(res => {
+            //             let pn = res.data.phone_number
+            //             let an = res.data.allow_notifications
+            //         })
+            //     phoneNumber: pn
+            //     allow_notifications: an
+            // }}
             validate={(values) => {
                 const errors: Partial<Values> = {};
                 if (!values.phoneNumber) {
