@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
+import Profile from "./components/Profile"
 import Notifications from "./components/Notifications";
 import Rotation from "./components/Rotation";
 
@@ -18,7 +19,7 @@ function App() {
   return (
     <Router>
       <React.StrictMode>
-        <Header profile={profile} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
+        <Header profile={profile} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
         <Switch>
           <Route
             exact
@@ -37,6 +38,11 @@ function App() {
             exact
             path="/logout"
             component={() => <Logout setLoggedIn={setLoggedIn} />}
+          />
+          <Route
+            exact
+            path="/profile"
+            component={() => <Profile profile={profile} setProfile={setProfile} />}
           />
           <Route
             exact

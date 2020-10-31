@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Profile() {
+export default function Profile(props) {
     const classes = useStyles();
     const history = useHistory();
     const [errorMessage, setErrorMessage] = useState("");
@@ -47,15 +47,10 @@ export default function Profile() {
     return (
 
         <Formik
-            // initialValues={(values) => {
-            //     axiosInstance.get("/api/v1/profile")
-            //         .then(res => {
-            //             let pn = res.data.phone_number
-            //             let an = res.data.allow_notifications
-            //         })
-            //     phoneNumber: pn
-            //     allow_notifications: an
-            // }}
+            initialValues={{
+                phoneNumber: props.profile.phone_number,
+                allow_notifications: props.profile.allow_notifications
+            }}
             validate={(values) => {
                 const errors: Partial<Values> = {};
                 if (!values.phoneNumber) {
@@ -69,21 +64,17 @@ export default function Profile() {
             }}
             onSubmit={(values, { setSubmitting }) => {
                 setErrorMessage("");
+                console.log(values)
                 axiosInstance
-                    .post(`/profile`, {
-                        phoneNumber: values.phoneNumber,
-                        password: values.password,
-                    })
-                    .then((res) => {
-                        sessionStorage.setItem("phone_number", res.data.phone_number);
-                        sessionStorage.setItem("True", res.data.allow_notifications);
-                        axiosInstance.defaults.headers["Authorization"] =
-                            "JWT " + sessionStorage.getItem("access_token");
-                    })
-                    .then(() => {
-                        history.push("/");
-                        window.location.reload();
-                    })
+                    .put(`/user/profile`, {
+                        phone_number: values.phoneNumber,
+                        allow_notifications: values.notify,
+
+                    }).then(() => props.setProfile({
+                        ...props.profile,
+                        phone_number: values.phoneNumber,
+                        allow_notifications: values.notify
+                    }))
                     .catch((err) => {
                         setErrorMessage("Your preferences could not be changed");
                     });
