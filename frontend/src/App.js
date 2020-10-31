@@ -1,40 +1,30 @@
-import React, { useEffect, useState } from "react";
-import "./App.css";
-import Items from "./components/Items";
-import LoadingComponent from "./components/LoadingCircular";
-import axiosInstance from "./services/axios";
-import { Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles({
-  header: {
-    textAlign: "center",
-    padding: "1rem",
-    marginBottom: '1rem',
-  },
-});
+import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Landing from "./components/Landing";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import Login from "./components/Login";
+import Logout from "./components/Logout";
+import Notifications from "./components/Notifications";
+import * as serviceWorker from "./serviceWorker";
 
 function App() {
-  const Loading = LoadingComponent(Items);
-  const classes = useStyles();
-  const [appState, setAppState] = useState({
-    loading: true,
-    items: null,
-  });
-
-  useEffect(() => {
-    axiosInstance.get("notification/test").then((res) => {
-      const allItems = res ? res.data : "Unauthorized";
-      setAppState({ loading: false, items: allItems });
-    });
-  }, []);
   return (
-    <div className="App">
-      <Typography variant="h3" className={classes.header}>
-        Landing page
-      </Typography>
-      <Loading isLoading={appState.loading} items={appState.items} />
-    </div>
+    // <Landing />
+    <Router>
+      <React.StrictMode>
+        <Header />
+        <Switch>
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/notification-history" component={Notifications} />
+          <Route exact path="/logout" component={Logout} />
+        </Switch>
+        <Footer />
+      </React.StrictMode>
+    </Router>
   );
 }
 export default App;
+
+
