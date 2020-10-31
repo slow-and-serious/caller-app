@@ -6,11 +6,9 @@ import Header from "./components/Header";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
 import Notifications from "./components/Notifications";
-import * as serviceWorker from "./serviceWorker";
 
 function App() {
   return (
-    // <Landing />
     <Router>
       <React.StrictMode>
         <Header />
