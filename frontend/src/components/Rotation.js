@@ -36,7 +36,7 @@ export default function Rotation() {
 
   return (
     <Container>
-      <Typography variant="h3" className={classes.header}>Rotations</Typography>
+      <Typography variant="h3" className={classes.header}>Rotation History</Typography>
       <Loading isLoading={loading} rows={rows} headers={headers} />
     </Container>
   );

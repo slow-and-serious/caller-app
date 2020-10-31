@@ -18,7 +18,7 @@ function App() {
   return (
     <Router>
       <React.StrictMode>
-        <Header profile={profile} loggedIn={loggedIn} />
+        <Header profile={profile} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
         <Switch>
           <Route
             exact

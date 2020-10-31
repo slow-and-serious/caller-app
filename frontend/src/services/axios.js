@@ -16,6 +16,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.response.use(
   (response) => {
+    // we need to set state to loggedIn = true
     return response;
   },
   async function (error) {

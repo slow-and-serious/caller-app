@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -66,17 +66,34 @@ function LoginLogout(props) {
   );
 }
 
+function checkSessionIfNoLoggedIn(setLoggedIn) {
+  const refreshToken = sessionStorage.getItem("refresh_token");
+  if (refreshToken) {
+    const tokenParts = JSON.parse(atob(refreshToken.split(".")[1]));
+    // exp date in token is expressed in seconds, while now() returns milliseconds:
+    const now = Math.ceil(Date.now() / 1000);
+    console.log(refreshToken);
+
+    if (tokenParts.exp > now) {
+      setLoggedIn(true);
+    }
+  }
+}
+
 function Header(props) {
   const classes = useStyles();
-
+  useEffect(() => {
+    if (!props.loggedIn) {
+      checkSessionIfNoLoggedIn(props.setLoggedIn);
+    }
+  });
   const navLinks = [
     {
       title: `Notification History`,
       path: `/notification-history`,
       viewableByManager: "False", // This doesn't need to be "false" it can be anything besides "True"
     },
-    { title: `Rotation`, path: `/rotation`, viewableByManager: "True" },
-    
+    { title: `Rotation History`, path: `/rotation`, viewableByManager: "True" },
   ];
 
   return (
