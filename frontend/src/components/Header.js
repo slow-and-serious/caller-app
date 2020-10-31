@@ -3,14 +3,15 @@ import {
   Button,
   CssBaseline,
   Link,
+  List,
+  ListItem,
+  ListItemText,
   Toolbar,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import { NavLink } from "react-router-dom";
-
-
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -22,10 +23,29 @@ const useStyles = makeStyles((theme) => ({
   toolbarTitle: {
     flexGrow: 1,
   },
+  // navbarDisplayFlex: {
+  //   display: `flex`,
+  //   justifyContent: `space-between`
+  // },
+  navDisplayFlex: {
+    display: `flex`,
+    justifyContent: `space-between`,
+  },
+  linkText: {
+    textDecoration: `none`,
+    textTransform: `uppercase`,
+    color: `black`,
+  },
 }));
 
 function Header() {
   const classes = useStyles();
+
+  const navLinks = [
+    { title: `Notification History`, path: `/notification-history` },
+    { title: `Example link`, path: `/` },
+  ];
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -51,6 +71,21 @@ function Header() {
               Caller App
             </Link>
           </Typography>
+
+          <List
+            component="nav"
+            aria-labelledby="main navigation"
+            className={classes.navDisplayFlex}
+          >
+            {navLinks.map(({ title, path }) => (
+              <a href={path} key={title} className={classes.linkText}>
+                <ListItem button>
+                  <ListItemText primary={title} />
+                </ListItem>
+              </a>
+            ))}
+          </List>
+
           <Button
             href="#"
             color="primary"

@@ -1,11 +1,22 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import Items from "./components/Items";
-import PostLoadingComponent from "./components/ItemsLoading";
+import LoadingComponent from "./components/LoadingCircular";
 import axiosInstance from "./services/axios";
+import { Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  header: {
+    textAlign: "center",
+    padding: "1rem",
+    marginBottom: '1rem',
+  },
+});
 
 function App() {
-  const ItemsLoading = PostLoadingComponent(Items);
+  const Loading = LoadingComponent(Items);
+  const classes = useStyles();
   const [appState, setAppState] = useState({
     loading: true,
     items: null,
@@ -19,8 +30,10 @@ function App() {
   }, []);
   return (
     <div className="App">
-      <h1>Items</h1>
-      <ItemsLoading isLoading={appState.loading} items={appState.items} />
+      <Typography variant="h3" className={classes.header}>
+        Landing page
+      </Typography>
+      <Loading isLoading={appState.loading} items={appState.items} />
     </div>
   );
 }

@@ -20,9 +20,9 @@ class RotationSerializer(serializers.ModelSerializer):
         model = Rotation
 class NotificationSerializer(serializers.ModelSerializer):
     message = serializers.CharField(source='rotation.message', read_only=True)
-    manager_id = serializers.CharField(source='rotation.manager.id', read_only=True)
-    user_id = serializers.CharField(source='user.id', read_only=True)
+    manager = serializers.CharField(source='rotation.manager.first_name', read_only=True)
+    user = serializers.CharField(source='user.first_name', read_only=True)
     class Meta:
         model = Notification
-        fields = ('id', 'start_date_time', 'end_date_time', 'user_id', 'manager_id', 'notification_type', 'message', 'user_response', 'completed')
+        fields = ('id', 'start_date_time', 'end_date_time', 'user', 'manager', 'notification_type', 'message', 'user_response', 'completed')
 
