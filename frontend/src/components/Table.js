@@ -35,8 +35,8 @@ export default function BasicTable(props) {
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.id}>
-              {fieldNames.map((field) => (
-                <TableCell align="left">{row[field]}</TableCell>
+              {fieldNames.map((field, idx) => (
+                <TableCell align="left" key={idx}>{row[field]}</TableCell>
               ))}
             </TableRow>
           ))}

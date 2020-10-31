@@ -94,6 +94,7 @@ function Header(props) {
       viewableByManager: "False", // This doesn't need to be "false" it can be anything besides "True"
     },
     { title: `Rotation History`, path: `/rotation`, viewableByManager: "True" },
+    { title: `Start Rotation`, path: `/start-rotation`, viewableByManager: "True" },
   ];
 
   return (

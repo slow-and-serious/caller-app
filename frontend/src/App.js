@@ -7,6 +7,8 @@ import Login from "./components/Login";
 import Logout from "./components/Logout";
 import Notifications from "./components/Notifications";
 import Rotation from "./components/Rotation";
+import StartRotation from "./components/StartRotation";
+import RotationDetail from "./components/RotationDetail";
 
 function App() {
   const [profile, setProfile] = useState({
@@ -42,6 +44,16 @@ function App() {
             exact
             path="/rotation"
             component={() => <Rotation loggedIn={loggedIn} profile={profile} />}
+          />
+          <Route
+            exact
+            path="/start-rotation"
+            component={() => <StartRotation />}
+          />
+          <Route
+            exact
+            path="/rotation-detail/:id"
+            component={() => <RotationDetail />}
           />
         </Switch>
         <Footer />
