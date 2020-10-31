@@ -38,12 +38,44 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Header() {
+function LoginLogout(props) {
+  const classes = props.classes;
+  const loggedIn = props.loggedIn;
+  return loggedIn ? (
+    <Button
+      href="#"
+      color="primary"
+      variant="outlined"
+      className={classes.link}
+      component={NavLink}
+      to="/logout"
+    >
+      Logout
+    </Button>
+  ) : (
+    <Button
+      href="#"
+      color="primary"
+      variant="outlined"
+      className={classes.link}
+      component={NavLink}
+      to="/login"
+    >
+      Login
+    </Button>
+  );
+}
+
+function Header(props) {
   const classes = useStyles();
 
   const navLinks = [
-    { title: `Notification History`, path: `/notification-history` },
-    { title: `Example link`, path: `/` },
+    {
+      title: `Notification History`,
+      path: `/notification-history`,
+      viewableByManager: "False", // This doesn't need to be "false" it can be anything besides "True"
+    },
+    { title: `Example link`, path: `/`, viewableByManager: "all" },
   ];
 
   return (
@@ -77,35 +109,26 @@ function Header() {
             aria-labelledby="main navigation"
             className={classes.navDisplayFlex}
           >
-            {navLinks.map(({ title, path }) => (
-              <a href={path} key={title} className={classes.linkText}>
-                <ListItem button>
-                  <ListItemText primary={title} />
-                </ListItem>
-              </a>
-            ))}
+            {props.loggedIn
+              ? navLinks.map(({ title, path, viewableByManager }) =>
+                  viewableByManager === "all" ||
+                  viewableByManager === props.profile.is_manager ? (
+                    <Link
+                      component={NavLink}
+                      to={path}
+                      underline="none"
+                      key={title}
+                      className={classes.linkText}
+                    >
+                      <ListItem button>
+                        <ListItemText primary={title} />
+                      </ListItem>
+                    </Link>
+                  ) : null
+                )
+              : null}
           </List>
-
-          <Button
-            href="#"
-            color="primary"
-            variant="outlined"
-            className={classes.link}
-            component={NavLink}
-            to="/login"
-          >
-            Login
-          </Button>
-          <Button
-            href="#"
-            color="primary"
-            variant="outlined"
-            className={classes.link}
-            component={NavLink}
-            to="/logout"
-          >
-            Logout
-          </Button>
+          <LoginLogout classes={classes} loggedIn={props.loggedIn} />
         </Toolbar>
       </AppBar>
     </React.Fragment>

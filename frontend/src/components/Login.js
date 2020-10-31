@@ -39,11 +39,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Login() {
+export default function Login(props) {
   const classes = useStyles();
   const history = useHistory();
   const [errorMessage, setErrorMessage] = useState("");
-
   return (
     <Formik
       initialValues={{
@@ -77,12 +76,18 @@ export default function Login() {
           .then((res) => {
             sessionStorage.setItem("access_token", res.data.access);
             sessionStorage.setItem("refresh_token", res.data.refresh);
-            axiosInstance.defaults.headers["Authorization"] =
+            axiosInstance.defaults.headers["authorization"] =
               "JWT " + sessionStorage.getItem("access_token");
+            props.setLoggedIn(true);
+          })
+          .then(() => {
+            axiosInstance.get("user/profile").then((data) => {
+              props.setProfile(data.data)
+            });
           })
           .then(() => {
             history.push("/");
-            window.location.reload();
+            // window.location.reload();
           })
           .catch((err) => {
             setErrorMessage("The email and password do not match our records");
