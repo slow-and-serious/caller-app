@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const baseURL = "http://localhost:8000/api/v1/";
+const baseURL = "http://64.227.53.237/api/v1/";
 
 const axiosInstance = axios.create({
   baseURL: baseURL,
-  timeout: 50000,
+  timeout: 15000,
   headers: {
     authorization: sessionStorage.getItem("access_token")
       ? "JWT " + sessionStorage.getItem("access_token")
