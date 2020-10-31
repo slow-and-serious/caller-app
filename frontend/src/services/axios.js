@@ -4,7 +4,7 @@ const baseURL = "http://64.227.53.237/api/v1/";
 
 const axiosInstance = axios.create({
   baseURL: baseURL,
-  timeout: 5000,
+  timeout: 15000,
   headers: {
     authorization: sessionStorage.getItem("access_token")
       ? "JWT " + sessionStorage.getItem("access_token")
@@ -16,6 +16,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.response.use(
   (response) => {
+    // we need to set state to loggedIn = true
     return response;
   },
   async function (error) {
@@ -54,11 +55,11 @@ axiosInstance.interceptors.response.use(
               sessionStorage.setItem("access_token", response.data.access);
               sessionStorage.setItem("refresh_token", response.data.refresh);
 
-              axiosInstance.defaults.headers["Authorization"] =
+              axiosInstance.defaults.headers["authorization"] =
                 "JWT " + response.data.access;
-              originalRequest.headers["Authorization"] =
+              originalRequest.headers["authorization"] =
                 "JWT " + response.data.access;
-              window.location.reload();
+              // window.location.reload();
 
               return axiosInstance(originalRequest);
             })

@@ -19,29 +19,25 @@ const useStyles = makeStyles({
 export default function BasicTable(props) {
   const classes = useStyles();
   const { rows, headers } = props;
-
+  const fieldNames = Object.keys(rows[0]);
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
             {headers.map((header, idx) => (
-              <TableCell align="left" key={idx}>{header}</TableCell>
+              <TableCell align="left" key={idx}>
+                {header}
+              </TableCell>
             ))}
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.id}>
-              <TableCell align="left">{row.id}</TableCell>
-              <TableCell align="left">{row.start_date_time}</TableCell>
-              <TableCell align="left">{row.notification_type}</TableCell>
-              <TableCell align="left">{row.message}</TableCell>
-              <TableCell align="left">{row.manager}</TableCell>
-              <TableCell align="left">{row.user_response}</TableCell>
-              <TableCell align="left">
-                {row.completed ? "Completed" : "Not completed"}
-              </TableCell>
+              {fieldNames.map((field) => (
+                <TableCell align="left">{row[field]}</TableCell>
+              ))}
             </TableRow>
           ))}
         </TableBody>

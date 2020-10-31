@@ -3,8 +3,9 @@ from .models import CustomUser, Profile
 
 
 class ProfileSerializer(serializers.ModelSerializer):
+    is_manager = serializers.CharField(source="user.is_staff", read_only=True)
     class Meta:
-        fields = ('phone_number', 'allow_notifications')
+        fields = ('phone_number', 'allow_notifications', "is_manager")
         model = Profile
 
 

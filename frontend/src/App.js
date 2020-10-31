@@ -6,17 +6,43 @@ import Header from "./components/Header";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
 import Notifications from "./components/Notifications";
+import Rotation from "./components/Rotation";
 
 function App() {
+  const [profile, setProfile] = useState({
+    allow_notifications: "",
+    is_manager: "",
+    phone_number: "",
+  });
+  const [loggedIn, setLoggedIn] = useState(false);
   return (
     <Router>
       <React.StrictMode>
-        <Header />
+        <Header profile={profile} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
         <Switch>
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/login" component={Login} />
+          <Route
+            exact
+            path="/"
+            component={() => <Landing loggedIn={loggedIn} />}
+          />
           <Route exact path="/notification-history" component={Notifications} />
-          <Route exact path="/logout" component={Logout} />
+          <Route
+            exact
+            path="/login"
+            component={() => (
+              <Login setLoggedIn={setLoggedIn} setProfile={setProfile} />
+            )}
+          />
+          <Route
+            exact
+            path="/logout"
+            component={() => <Logout setLoggedIn={setLoggedIn} />}
+          />
+          <Route
+            exact
+            path="/rotation"
+            component={() => <Rotation loggedIn={loggedIn} profile={profile} />}
+          />
         </Switch>
         <Footer />
       </React.StrictMode>
@@ -24,5 +50,3 @@ function App() {
   );
 }
 export default App;
-
-
