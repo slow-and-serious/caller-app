@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'whitenoise.runserver_nostatic',
     'phonenumber_field',
+    'background_task',
 
     # 2FA
     'django_otp',

@@ -1,6 +1,9 @@
 from notifications.models import Rotation, Notification
 from twilioHandler.twilio.example import make_call
 import time
+from django.utils import timezone
+from background_task import background
+
 
 def is_done(id):
     notification = Notification.objects.get(pk=id)
@@ -13,6 +16,7 @@ def did_accept(id):
     elif notification.user_response == "DECLINE":
         return False
 
+@background(schedule=timezone.now())
 def start_rota(notification_id):
     try:
         rotation = Rotation.objects.get(pk=notification_id)
