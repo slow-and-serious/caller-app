@@ -2,8 +2,10 @@ import { Container, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../services/axios";
+import Green from "./Green";
 import LoadingComponent from "./LoadingLinear";
 import BasicTable from "./Table";
+
 
 const useStyles = makeStyles({
   header: {
@@ -38,12 +40,19 @@ export default function Notifications() {
     });
   }, []);
 
+  function conditional(text){
+    console.log(text)
+    return text==='ACCEPT'
+  }
+
+
+
   return (
     <Container>
-      <Typography variant="h3" className={classes.header}>
-        Notification History
-      </Typography>
-      <Loading isLoading={loading} rows={rows} headers={headers} />
+
+      <Typography variant="h3" className={classes.header}>Notification History</Typography>
+      <Loading isLoading={loading} rows={rows} headers={headers} effect={Green} conditional={conditional}/>
+
     </Container>
   );
 }
