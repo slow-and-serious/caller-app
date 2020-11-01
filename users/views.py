@@ -50,7 +50,7 @@ def profile(request):
 @api_view(['GET', 'PUT'])
 @permission_classes([IsAuthenticated & IsAdminUser])
 def user_list(request):
-    users = CustomUser.objects.filter(profile__manager=request.user)
+    users = CustomUser.objects.filter(profile__manager=request.user).order_by('id')
     serialized_users = []
     
     for user in users:

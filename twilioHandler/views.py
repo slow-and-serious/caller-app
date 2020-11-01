@@ -60,7 +60,9 @@ def user_response(request):
             return HttpResponse(str(resp), content_type="text/xml")
         else:
             # If the caller didn't choose 1 or 2, apologize and ask them again
-            resp.say("Sorry, I don't understand that choice.")
+            resp.say("Sorry, I don't understand that choice, goodbye")
+            notification.completed = True
+            notification.save()
 
     # If the user didn't choose 1 or 2 (or anything), send them back to the prompt
     resp.redirect(f'/twilio/maketwiml?{message}')
