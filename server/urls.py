@@ -34,7 +34,7 @@ urlpatterns = [
 
     # Users
     path('api/v1/user/', include('users.urls')),
-    
+
     # Auth for browsable API
     path('api-auth/', include('rest_framework.urls')),
 
@@ -43,7 +43,7 @@ urlpatterns = [
 
     # Twilio
     path('twilio/maketwiml', include('twilioHandler.urls')),
-    
+
     # React frontend
     path('<everything>', TemplateView.as_view(template_name='index.html')),
 ]

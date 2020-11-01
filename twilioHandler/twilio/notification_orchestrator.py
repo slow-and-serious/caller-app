@@ -33,8 +33,10 @@ def start_rota(notification_id):
             phone_number = notification.user.profile.phone_number
             id = notification.id
             make_call(str(phone_number), message, id)
-            while is_done(id) == False:
+            count = 0
+            while is_done(id) == False and count < 6:
                 time.sleep(10)
+                count += 1
                 # wait till this call
             if did_accept(id):
                 #break this loop
