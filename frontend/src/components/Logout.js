@@ -6,7 +6,7 @@ export default function Logout(props) {
   const history = useHistory();
 
   useEffect(() => {
-    props.setLoggedIn(false)
+    props.setLoggedIn(false);
     axiosInstance.post("user/logout/blacklist", {
       refresh_token: sessionStorage.getItem("refresh_token"),
     });

@@ -14,8 +14,6 @@ import LoadingComponent from "./LoadingLinear";
 import BasicTable from "./Table";
 import { useHistory } from "react-router-dom";
 
-
-
 const useStyles = makeStyles((theme) => ({
   header: {
     textAlign: "center",
@@ -43,7 +41,6 @@ export default function StartRotation() {
   const classes = useStyles();
   const [errorMessage, setErrorMessage] = useState("");
   const history = useHistory();
-
 
   const headers = [
     "ID",
@@ -95,8 +92,8 @@ export default function StartRotation() {
               message: `${values.message}. Press 1 for yes and 2 for no`,
             })
             .then((res) => {
-              console.log(res.data)
-              history.push(`/rotation-detail/${res.data}`)
+              console.log(res.data);
+              history.push(`/rotation-detail/${res.data}`);
             })
             .catch((err) => {
               setErrorMessage(

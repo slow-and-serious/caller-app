@@ -9,7 +9,7 @@ const useStyles = makeStyles({
   header: {
     textAlign: "center",
     padding: "1rem",
-    marginBottom: '1rem',
+    marginBottom: "1rem",
   },
 });
 
@@ -18,13 +18,7 @@ export default function Rotation() {
   const [loading, setLoading] = useState(true);
   const classes = useStyles();
 
-  const headers = [
-    "ID",
-    "Date",
-    "Message",
-    "Manager",
-    "Number of calls"
-  ];
+  const headers = ["ID", "Date", "Message", "Manager", "Number of calls"];
   const Loading = LoadingComponent(BasicTable);
 
   useEffect(() => {
@@ -36,7 +30,9 @@ export default function Rotation() {
 
   return (
     <Container>
-      <Typography variant="h3" className={classes.header}>Rotation History</Typography>
+      <Typography variant="h3" className={classes.header}>
+        Rotation History
+      </Typography>
       <Loading isLoading={loading} rows={rows} headers={headers} />
     </Container>
   );

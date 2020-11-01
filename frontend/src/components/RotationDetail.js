@@ -4,24 +4,22 @@ import React, { useEffect, useState } from "react";
 import axiosInstance from "../services/axios";
 import LoadingComponent from "./LoadingLinear";
 import BasicTable from "./Table";
-import {useParams} from "react-router-dom"
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles({
   header: {
     textAlign: "center",
     padding: "1rem",
-    marginBottom: '1rem',
+    marginBottom: "1rem",
   },
 });
 
 export default function RotationDetail(props) {
-
-  const {id} = useParams()
+  const { id } = useParams();
   console.log(id);
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(true);
   const classes = useStyles();
-
 
   const headers = [
     "ID",
@@ -32,7 +30,7 @@ export default function RotationDetail(props) {
     "Notification Type",
     "Message",
     "Response",
-    "Completed"
+    "Completed",
   ];
   const Loading = LoadingComponent(BasicTable);
 
@@ -50,7 +48,9 @@ export default function RotationDetail(props) {
 
   return (
     <Container>
-      <Typography variant="h3" className={classes.header}>Rotation Detail</Typography>
+      <Typography variant="h3" className={classes.header}>
+        Rotation Detail
+      </Typography>
       <Loading isLoading={loading} rows={rows} headers={headers} />
     </Container>
   );

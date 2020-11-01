@@ -82,7 +82,7 @@ export default function Login(props) {
           })
           .then(() => {
             axiosInstance.get("user/profile").then((data) => {
-              props.setProfile(data.data)
+              props.setProfile(data.data);
             });
           })
           .then(() => {
