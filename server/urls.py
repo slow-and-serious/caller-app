@@ -46,4 +46,6 @@ urlpatterns = [
 
     # React frontend
     path('<everything>', TemplateView.as_view(template_name='index.html')),
+    path('<everything>/<everything>', TemplateView.as_view(template_name='index.html')),
+    path('<everything>/<everything>/everything', TemplateView.as_view(template_name='index.html')),
 ]
