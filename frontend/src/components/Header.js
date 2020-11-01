@@ -53,6 +53,7 @@ function LoginLogout(props) {
       Logout
     </Button>
   ) : (
+
       <Button
         href="#"
         color="primary"
@@ -64,6 +65,7 @@ function LoginLogout(props) {
         Login
       </Button>
     );
+
 }
 
 function checkSessionIfNoLoggedIn(setLoggedIn) {
@@ -95,6 +97,7 @@ function Header(props) {
     },
     { title: `Rotation History`, path: `/rotation`, viewableByManager: "True" },
     { title: `Profile`, path: `/profile`, viewableByManager: "False" },
+
   ];
 
   return (
@@ -131,6 +134,7 @@ function Header(props) {
             {props.loggedIn
               ? navLinks.map(({ title, path, viewableByManager }) =>
                 viewableByManager === "all" ||
+
                   viewableByManager === props.profile.is_manager ? (
                     <Link
                       component={NavLink}
@@ -144,7 +148,9 @@ function Header(props) {
                       </ListItem>
                     </Link>
                   ) : null
+
               )
+
               : null}
           </List>
           <LoginLogout classes={classes} loggedIn={props.loggedIn} />
