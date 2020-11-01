@@ -1,27 +1,23 @@
-import React, { useEffect, useState } from "react";
-import "../App.css";
-import Items from "./Items";
-import LoadingComponent from "./LoadingCircular";
-import axiosInstance from "../services/axios";
-import { Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import withRoot from './WithRoot';
+// --- Post bootstrap -----
+import React from 'react';
+// import Footer from './Footer';
+// import Header from './Header'
+import BodyLayout from './BodyLayout';
+// import ProductHero from './modules/views/ProductHero';
+// import ProductValues from './modules/views/ProductValues';
+// import ProductHowItWorks from './modules/views/ProductHowItWorks';
+// import ProductCTA from './modules/views/ProductCTA';
+// import AppAppBar from './modules/views/AppAppBar';
 
-const useStyles = makeStyles({
-  header: {
-    textAlign: "center",
-    padding: "1rem",
-    marginBottom: "1rem",
-  },
-});
-
-export default function Landing() {
-  const classes = useStyles();
-
+function Index() {
   return (
-    <div className="App">
-      <Typography variant="h3" className={classes.header}>
-        Landing page
-      </Typography>
-    </div>
+    <React.Fragment>
+      
+      < BodyLayout />
+
+    </React.Fragment>
   );
 }
+
+export default withRoot(Index);
