@@ -1,6 +1,5 @@
 import {
     Button,
-    Checkbox,
     Container,
     CssBaseline,
     LinearProgress,
@@ -9,8 +8,8 @@ import {
 import { Alert } from "@material-ui/lab";
 import { makeStyles } from "@material-ui/core/styles";
 import { Field, Form, Formik } from "formik";
-import { TextField } from "formik-material-ui";
-import React, { useState, useEffect } from "react";
+import { Checkbox, TextField } from "formik-material-ui";
+import React, { useState } from "react";
 import axiosInstance from "../services/axios";
 import { useHistory } from "react-router-dom";
 
@@ -47,18 +46,19 @@ export default function Profile(props) {
     return (
 
         <Formik
+
             initialValues={{
-                phoneNumber: props.profile.phone_number,
+                phone_number: props.profile.phone_number,
                 allow_notifications: props.profile.allow_notifications
             }}
             validate={(values) => {
                 const errors: Partial<Values> = {};
-                if (!values.phoneNumber) {
-                    errors.phoneNumber = "xxx-xxx-xxxx";
+                if (!values.phone_number) {
+                    errors.phone_number = "xxx-xxx-xxxx";
                 } else if (
-                    !/^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/im.test(values.phoneNumber)
+                    !/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im.test(values.phone_number)
                 ) {
-                    errors.phoneNumber = "Invalid Phone Number";
+                    errors.phone_number = "Invalid Phone Number";
                 }
                 return errors;
             }}
@@ -67,13 +67,13 @@ export default function Profile(props) {
                 console.log(values)
                 axiosInstance
                     .put(`/user/profile`, {
-                        phone_number: values.phoneNumber,
-                        allow_notifications: values.notify,
+                        phone_number: values.phone_number,
+                        allow_notifications: values.allow_notifications,
 
                     }).then(() => props.setProfile({
                         ...props.profile,
-                        phone_number: values.phoneNumber,
-                        allow_notifications: values.notify
+                        phone_number: values.phone_number,
+                        allow_notifications: values.allow_notifications
                     }))
                     .catch((err) => {
                         setErrorMessage("Your preferences could not be changed");
@@ -83,20 +83,20 @@ export default function Profile(props) {
                 }, 800);
             }}
         >
-            {({ submitForm, isSubmitting }) => (
+            {({ submitForm, isSubmitting, setFieldValue }) => (
                 <Container component="main" maxWidth="xs">
                     <CssBaseline />
                     <div className={classes.paper}>
 
                         <Typography component="h1" variant="h5">
                             Profile Preferences
-            </Typography>
+                        </Typography>
                         {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
                         <Form className={classes.form}>
                             <Field
                                 component={TextField}
-                                name="phoneNumber"
-                                type="phoneNumber"
+                                name="phone_number"
+                                type="phone_number"
                                 label="Phone Number"
                                 variant="outlined"
                                 margin="normal"
@@ -109,11 +109,16 @@ export default function Profile(props) {
                             <Field
                                 component={Checkbox}
                                 type="checkbox"
-                                name="notify"
+                                name="allow_notifications"
                                 variant="outlined"
                                 margin="normal"
+                                // value={true}
                                 required
                                 fullWidth
+                            // checked={}
+                            // onChange={(e) =>
+                            //     setFieldValue("checked", "")
+                            // }
                             />Notify
                             {isSubmitting && <LinearProgress />}
                             <br />
@@ -126,7 +131,7 @@ export default function Profile(props) {
                                 onClick={submitForm}
                             >
                                 Submit changes
-              </Button>
+                            </Button>
                         </Form>
                     </div>
                 </Container>
