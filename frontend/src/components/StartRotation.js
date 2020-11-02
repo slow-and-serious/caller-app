@@ -39,7 +39,6 @@ export default function StartRotation() {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(true);
   const classes = useStyles();
-  const [errorMessage, setErrorMessage] = useState("");
   const history = useHistory();
 
   const headers = [
@@ -86,7 +85,6 @@ export default function StartRotation() {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          setErrorMessage("");
           axiosInstance
             .post(`notification/start-rotation`, {
               message: `${values.message}. Press 1 for yes and 2 for no`,
@@ -96,9 +94,6 @@ export default function StartRotation() {
               history.push(`/rotation-detail/${res.data}`);
             })
             .catch((err) => {
-              setErrorMessage(
-                "The email and password do not match our records"
-              );
               console.log(err);
             });
           setTimeout(() => {
