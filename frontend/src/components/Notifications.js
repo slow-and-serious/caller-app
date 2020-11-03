@@ -11,7 +11,7 @@ const useStyles = makeStyles({
   header: {
     textAlign: "center",
     padding: "1rem",
-    marginBottom: '1rem',
+    marginBottom: "1rem",
   },
 });
 
@@ -34,7 +34,7 @@ export default function Notifications() {
 
   useEffect(() => {
     axiosInstance.get("notification/notification-history").then((data) => {
-      const rows = data.data.filter(row => row.completed)
+      const rows = data.data.filter((row) => row.completed);
       setRows(rows);
       setLoading(false);
     });
@@ -49,8 +49,10 @@ export default function Notifications() {
 
   return (
     <Container>
+
       <Typography variant="h3" className={classes.header}>Notification History</Typography>
       <Loading isLoading={loading} rows={rows} headers={headers} effect={Green} conditional={conditional}/>
+
     </Container>
   );
 }

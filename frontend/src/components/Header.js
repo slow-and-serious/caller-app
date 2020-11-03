@@ -53,21 +53,24 @@ function LoginLogout(props) {
       Logout
     </Button>
   ) : (
-    <Button
-      href="#"
-      color="primary"
-      variant="outlined"
-      className={classes.link}
-      component={NavLink}
-      to="/login"
-    >
-      Login
-    </Button>
-  );
+
+      <Button
+        href="#"
+        color="primary"
+        variant="outlined"
+        className={classes.link}
+        component={NavLink}
+        to="/login"
+      >
+        Login
+      </Button>
+    );
+
 }
 
-function checkSessionIfNoLoggedIn(setLoggedIn) {
+function checkSessionIfNoLoggedIn(setLoggedIn, setProfile) {
   const refreshToken = sessionStorage.getItem("refresh_token");
+  const profile = sessionStorage.getItem("profile")
   if (refreshToken) {
     const tokenParts = JSON.parse(atob(refreshToken.split(".")[1]));
     // exp date in token is expressed in seconds, while now() returns milliseconds:
@@ -76,6 +79,7 @@ function checkSessionIfNoLoggedIn(setLoggedIn) {
 
     if (tokenParts.exp > now) {
       setLoggedIn(true);
+      if(profile){setProfile(JSON.parse(profile))}
     }
   }
 }
@@ -84,7 +88,7 @@ function Header(props) {
   const classes = useStyles();
   useEffect(() => {
     if (!props.loggedIn) {
-      checkSessionIfNoLoggedIn(props.setLoggedIn);
+      checkSessionIfNoLoggedIn(props.setLoggedIn, props.setProfile);
     }
   });
   const navLinks = [
@@ -94,6 +98,14 @@ function Header(props) {
       viewableByManager: "False", // This doesn't need to be "false" it can be anything besides "True"
     },
     { title: `Rotation History`, path: `/rotation`, viewableByManager: "True" },
+    {
+      title: `Start Rotation`,
+      path: `/start-rotation`,
+      viewableByManager: "True",
+    },
+    { title: `Profile`, path: `/profile`, viewableByManager: "False" },
+
+
   ];
 
   return (
@@ -129,7 +141,8 @@ function Header(props) {
           >
             {props.loggedIn
               ? navLinks.map(({ title, path, viewableByManager }) =>
-                  viewableByManager === "all" ||
+                viewableByManager === "all" ||
+
                   viewableByManager === props.profile.is_manager ? (
                     <Link
                       component={NavLink}
@@ -143,7 +156,9 @@ function Header(props) {
                       </ListItem>
                     </Link>
                   ) : null
-                )
+
+              )
+
               : null}
           </List>
           <LoginLogout classes={classes} loggedIn={props.loggedIn} />

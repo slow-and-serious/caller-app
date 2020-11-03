@@ -82,7 +82,8 @@ export default function Login(props) {
           })
           .then(() => {
             axiosInstance.get("user/profile").then((data) => {
-              props.setProfile(data.data)
+              props.setProfile(data.data);
+              sessionStorage.setItem("profile", JSON.stringify(data.data))
             });
           })
           .then(() => {
@@ -105,7 +106,15 @@ export default function Login(props) {
               Sign in
             </Typography>
             {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
-            <Form className={classes.form}>
+            <form
+              className={classes.form}
+              onSubmit={submitForm}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  submitForm();
+                }
+              }}
+            >
               <Field
                 component={TextField}
                 name="email"
@@ -139,7 +148,7 @@ export default function Login(props) {
               >
                 Submit
               </Button>
-            </Form>
+            </form>
           </div>
         </Container>
       )}

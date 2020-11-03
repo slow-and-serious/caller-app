@@ -10,8 +10,6 @@ urlpatterns = [
     path('token/refresh',
          jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('logout/blacklist', token_blacklist, name='blacklist'),
-    
-    
     path('profile', profile, name='profile'),
     path('list', user_list, name='list'),
 ]

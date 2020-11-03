@@ -43,7 +43,7 @@ export default function BasicTable(props) {
             <TableRow key={row.id}>
               {fieldNames.map((field) => {
                 return conditional(row[field]) ?
-                  <props.effect text={row[field]} />
+                <TableCell align="left"><props.effect text={row[field]} /></TableCell>
                   :
                   <TableCell align="left">{row[field]}</TableCell>
               })}
