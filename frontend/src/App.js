@@ -10,6 +10,7 @@ import Notifications from "./components/Notifications";
 import Rotation from "./components/Rotation";
 import StartRotation from "./components/StartRotation";
 import RotationDetail from "./components/RotationDetail";
+import About from "./components/About";
 
 function App() {
   const [profile, setProfile] = useState({
@@ -30,6 +31,11 @@ function App() {
             path="/"
             component={() => <Landing loggedIn={loggedIn} />}
           />
+          <Route
+            exact
+            path="/About"
+            component={() => <About loggedIn={loggedIn} />}
+          /> 
           <Route exact path="/notification-history" component={Notifications} />
           <Route
             exact

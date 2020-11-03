@@ -1,21 +1,17 @@
-import withRoot from './WithRoot';
-// --- Post bootstrap -----
+import withRoot from './withRoot';
 import React from 'react';
-// import Footer from './Footer';
-// import Header from './Header'
-import BodyLayout from './BodyLayout';
-// import ProductHero from './modules/views/ProductHero';
-// import ProductValues from './modules/views/ProductValues';
-// import ProductHowItWorks from './modules/views/ProductHowItWorks';
-// import ProductCTA from './modules/views/ProductCTA';
-// import AppAppBar from './modules/views/AppAppBar';
+
+import Body from './Body';
+import HowItWorks from './HowItWorks';
+import WeServe from './weServe';
 
 function Index() {
   return (
     <React.Fragment>
-      
-      < BodyLayout />
-
+  
+      <Body />
+      <HowItWorks />
+      <WeServe />
     </React.Fragment>
   );
 }

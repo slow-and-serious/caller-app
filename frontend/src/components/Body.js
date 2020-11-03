@@ -1,13 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-// import Button from '../components/Button';
-import Typography from './Typography';
 import BodyLayout from './BodyLayout';
+import photo from '../Assets/adobestock_354858046.png'
 
-
-const backgroundImage =
-  './Assets/storage-containers.jpg';
+const backgroundImage = photo;
 
 const styles = (theme) => ({
   background: {
@@ -30,38 +27,20 @@ const styles = (theme) => ({
   },
 });
 
-function BodyStuff(props) {
+function Body(props) {
   const { classes } = props;
 
   return (
     <BodyLayout backgroundClassName={classes.background}>
       {/* Increase the network loading priority of the background image. */}
       <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
-      <Typography color="inherit" align="center" variant="h2" marked="center">
-        Upgrade your Sundays
-      </Typography>
-      <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
-        Enjoy secret offers up to -70% off the best luxury hotels every Sunday.
-      </Typography>
-      <Button
-        color="secondary"
-        variant="contained"
-        size="large"
-        className={classes.button}
-        component="a"
-        href="/premium-themes/onepirate/sign-up/"
-      >
-        Register
-      </Button>
-      <Typography variant="body2" color="inherit" className={classes.more}>
-        Discover the experience
-      </Typography>
+    
     </BodyLayout>
   );
 }
 
-ProductHero.propTypes = {
+Body.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(BodyStuff);
+export default withStyles(styles)(Body);
