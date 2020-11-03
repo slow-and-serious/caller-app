@@ -47,17 +47,14 @@ const styles = (theme) => ({
     backgroundRepeat: 'no-repeat',
     zIndex: -2,
   },
-  arrowDown: {
-    position: 'absolute',
-    bottom: theme.spacing(4),
-  },
+
   color:{
     position: 'absolute', 
     left: '50%', 
-    top: '50%',
+    top: '20%',
     transform: 'translate(-50%, -50%)',
     color: 'black',
-    backgroundColor: 'rgba(255,255,255,.9)',
+    backgroundColor: 'rgba(255,255,255,.7)',
     width: 'fit-content',
     // opacity: 0.5,
     
@@ -65,7 +62,7 @@ const styles = (theme) => ({
   }
 });
 
-function ProductHeroLayout(props) {
+function BodyLayout(props) {
   const { backgroundClassName, children, classes } = props;
 
   return (
@@ -80,9 +77,10 @@ function ProductHeroLayout(props) {
       <Container className={classes.color}> 
             <typography>
                 
-                <p> hello world this is what we will do do this and do that </p>
-                <p>and this is how we will do it and folow along because this </p>
-                <p>is how it is just do this</p>  
+                <h3>Welcome to the Caller App an easy soulution to notify your employees</h3>
+                <h3>of open shifts by senority level. For info on how this works scroll down </h3>
+                <h3>to the how it works section.</h3>
+              
                 
             </typography>
         </Container>
@@ -90,10 +88,10 @@ function ProductHeroLayout(props) {
   );
 }
 
-ProductHeroLayout.propTypes = {
+BodyLayout.propTypes = {
   backgroundClassName: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ProductHeroLayout);
+export default withStyles(styles)(BodyLayout);

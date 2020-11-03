@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import ProductHeroLayout from './ProductHeroLayout';
+import BodyLayout from './BodyLayout';
 import photo from '../Assets/adobestock_354858046.png'
 
 const backgroundImage = photo;
@@ -27,20 +27,20 @@ const styles = (theme) => ({
   },
 });
 
-function ProductHero(props) {
+function Body(props) {
   const { classes } = props;
 
   return (
-    <ProductHeroLayout backgroundClassName={classes.background}>
+    <BodyLayout backgroundClassName={classes.background}>
       {/* Increase the network loading priority of the background image. */}
       <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
     
-    </ProductHeroLayout>
+    </BodyLayout>
   );
 }
 
-ProductHero.propTypes = {
+Body.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ProductHero);
+export default withStyles(styles)(Body);

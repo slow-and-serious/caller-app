@@ -1,13 +1,17 @@
 import withRoot from './withRoot';
 import React from 'react';
-import ProductHero from './ProductHero';
+
+import Body from './Body';
+import HowItWorks from './HowItWorks';
+import WeServe from './weServe';
 
 function Index() {
   return (
     <React.Fragment>
   
-      <ProductHero />
-      
+      <Body />
+      <HowItWorks />
+      <WeServe />
     </React.Fragment>
   );
 }
