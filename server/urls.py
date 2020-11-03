@@ -45,7 +45,7 @@ urlpatterns = [
     path('twilio/maketwiml', include('twilioHandler.urls')),
 
     # React frontend
-    path('<everything>', TemplateView.as_view(template_name='index.html')),
-    path('<everything>/<everything>', TemplateView.as_view(template_name='index.html')),
-    path('<everything>/<everything>/everything', TemplateView.as_view(template_name='index.html')),
+    path('<a>', TemplateView.as_view(template_name='index.html')),
+    path('<b>/<c>', TemplateView.as_view(template_name='index.html')),
+    path('<d>/<e>/<f>', TemplateView.as_view(template_name='index.html')),
 ]
