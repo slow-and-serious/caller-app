@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 class UserManager(BaseUserManager):
@@ -52,3 +53,15 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.email
+
+
+class Profile(models.Model):
+    # If user is deleted - delete the profile, not vice versa
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    manager = models.ForeignKey(
+        CustomUser, on_delete=models.SET_NULL, null=True, blank=True, related_name='manager')
+    phone_number = PhoneNumberField(blank=True, null=True)
+    allow_notifications = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f'{self.user.email} Profile'

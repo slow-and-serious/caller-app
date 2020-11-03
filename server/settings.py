@@ -14,7 +14,7 @@ from datetime import timedelta
 from pathlib import Path
 
 import environ
-
+import sys 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
     'whitenoise.runserver_nostatic',
+    'phonenumber_field',
+    'background_task',
 
     # 2FA
     'django_otp',
@@ -120,6 +122,13 @@ DATABASES = {
     }
 }
 
+if 'test' in sys.argv:
+    DATABASES = {
+      'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3'
+      }
+    }
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -216,3 +225,7 @@ TWILIO_SID = env("TWILIO_SID")
 TWILIO_AUTH = env("TWILIO_AUTH")
 TWILIO_NUMBER = env("TWILIO_NUMBER")
 DEPLOYED_URL = env("DEPLOYED_URL")
+
+# Background tasks settings
+MAX_RUN_TIME=120
+MAX_ATTEMPTS=1
