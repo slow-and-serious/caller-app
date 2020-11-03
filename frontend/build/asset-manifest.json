@@ -1,23 +1,32 @@
 {
   "files": {
-    "main.css": "/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/static/js/main.90aa5b3e.chunk.js",
-    "main.js.map": "/static/js/main.90aa5b3e.chunk.js.map",
+    "main.css": "/static/css/main.3d3bb17f.chunk.css",
+    "main.js": "/static/js/main.48d6d5c8.chunk.js",
+    "main.js.map": "/static/js/main.48d6d5c8.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.c8a21426.js",
     "runtime-main.js.map": "/static/js/runtime-main.c8a21426.js.map",
-    "static/js/2.8b64e087.chunk.js": "/static/js/2.8b64e087.chunk.js",
-    "static/js/2.8b64e087.chunk.js.map": "/static/js/2.8b64e087.chunk.js.map",
+    "static/js/2.4ec7a218.chunk.js": "/static/js/2.4ec7a218.chunk.js",
+    "static/js/2.4ec7a218.chunk.js.map": "/static/js/2.4ec7a218.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.6ed2f0ba7861920796c5d9f2d7715430.js": "/precache-manifest.6ed2f0ba7861920796c5d9f2d7715430.js",
+    "precache-manifest.72d18a488d4e9e1cd7beecc839f9f402.js": "/precache-manifest.72d18a488d4e9e1cd7beecc839f9f402.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/main.5ecd60fb.chunk.css.map": "/static/css/main.5ecd60fb.chunk.css.map",
-    "static/js/2.8b64e087.chunk.js.LICENSE.txt": "/static/js/2.8b64e087.chunk.js.LICENSE.txt",
-    "static/media/factory.jpg": "/static/media/factory.bddf2578.jpg"
+    "static/css/main.3d3bb17f.chunk.css.map": "/static/css/main.3d3bb17f.chunk.css.map",
+    "static/js/2.4ec7a218.chunk.js.LICENSE.txt": "/static/js/2.4ec7a218.chunk.js.LICENSE.txt",
+    "static/media/adobestock_354858046.png": "/static/media/adobestock_354858046.d9cad112.png",
+    "static/media/doctors-operating.jpg": "/static/media/doctors-operating.c84c9a7c.jpg",
+    "static/media/electrician.jpg": "/static/media/electrician.e657bf18.jpg",
+    "static/media/engineer.jpg": "/static/media/engineer.339fbc72.jpg",
+    "static/media/firfighter.jpg": "/static/media/firfighter.58a293d1.jpg",
+    "static/media/labtech.jpg": "/static/media/labtech.047b664f.jpg",
+    "static/media/metalfactory.jpg": "/static/media/metalfactory.d391ead7.jpg",
+    "static/media/oilworker.jpg": "/static/media/oilworker.7153c0a0.jpg",
+    "static/media/storage-containers.jpg": "/static/media/storage-containers.072ad8e2.jpg",
+    "static/media/tankerdriver.jpg": "/static/media/tankerdriver.96fd96a8.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.c8a21426.js",
-    "static/js/2.8b64e087.chunk.js",
-    "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.90aa5b3e.chunk.js"
+    "static/js/2.4ec7a218.chunk.js",
+    "static/css/main.3d3bb17f.chunk.css",
+    "static/js/main.48d6d5c8.chunk.js"
   ]
 }
