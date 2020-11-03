@@ -3,7 +3,7 @@ version: "3.7"
 services:
     web:
         build: .
-        command: gunicorn server.wsgi:application --bind 0.0.0.0:8000 --workers 4
+        command: gunicorn server.wsgi:application --bind 0.0.0.0:8000 --workers 4 --timeout 120
         volumes:
             - .:/code
         ports:
