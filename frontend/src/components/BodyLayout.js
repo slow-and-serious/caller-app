@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
- 
+import { typography } from 'material-ui/styles';
 
 const styles = (theme) => ({
   root: {
@@ -20,9 +20,12 @@ const styles = (theme) => ({
   container: {
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(14),
+    width: 'fit-content',
+    display: 'inline-block',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    backgroundColor: 'black',
   },
   backdrop: {
     position: 'absolute',
@@ -31,7 +34,7 @@ const styles = (theme) => ({
     top: 0,
     bottom: 0,
     backgroundColor: theme.palette.common.black,
-    opacity: 0.5,
+    opacity: 0.2,
     zIndex: -1,
   },
   background: {
@@ -44,10 +47,19 @@ const styles = (theme) => ({
     backgroundRepeat: 'no-repeat',
     zIndex: -2,
   },
-  arrowDown: {
-    position: 'absolute',
-    bottom: theme.spacing(4),
-  },
+
+  color:{
+    position: 'absolute', 
+    left: '50%', 
+    top: '20%',
+    transform: 'translate(-50%, -50%)',
+    color: 'black',
+    backgroundColor: 'rgba(255,255,255,.7)',
+    width: 'fit-content',
+    // opacity: 0.5,
+    
+    
+  }
 });
 
 function BodyLayout(props) {
@@ -56,25 +68,22 @@ function BodyLayout(props) {
   return (
     <section className={classes.root}>
       <Container className={classes.container}>
-      
-        <img
-          src={require('../Assets/factory.jpg')} 
-          alt="hello"
-          width = '650px'
-          height = '650px'
-/>
-        
+     
         {children}
         <div className={classes.backdrop} />
         <div className={clsx(classes.background, backgroundClassName)} />
-        <img
-          className={classes.arrowDown}
-          src="/static/themes/onepirate/productHeroArrowDown.png"
-          height="16"
-          width="12"
-          alt="arrow down"
-        />
+       
       </Container>
+      <Container className={classes.color}> 
+            <typography>
+                
+                <h3>Welcome to the Caller App an easy soulution to notify your employees</h3>
+                <h3>of open shifts by senority level. For info on how this works scroll down </h3>
+                <h3>to the how it works section.</h3>
+              
+                
+            </typography>
+        </Container>
     </section>
   );
 }
