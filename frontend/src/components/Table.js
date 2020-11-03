@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@material-ui/core";
+import { green, red } from "@material-ui/core/colors";
+import { makeStyles } from "@material-ui/core/styles";
+import React from "react";
+
 
 const useStyles = makeStyles({
   table: {
@@ -14,44 +18,37 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(id, firstName, lastName, startDateTime, endDateTime, message, notificationType, userResponse) {
-  return { id, firstName, lastName, startDateTime, endDateTime, message, notificationType, userResponse };
-}
+export default function BasicTable(props) {
+  function D() { return false }
+  const conditional = props.conditional || D
 
-const rows = [
-  createData('1','Snow', 'Flake',"2020-10-27T04:05:06.717805Z", "2020-10-27T04:05:06.717805Z",'Yes', 'Text', 'Yes-Available to work'),
-  createData('2', 'Jim', 'Jones', "2020-10-27T04:05:06.717805Z", "2020-10-27T04:05:06.717805Z",'Yes', 'Text', 'No -Been drinking')
-];
 
-export default function BasicTable() {
   const classes = useStyles();
-
+  const { rows, headers } = props;
+  const fieldNames = Object.keys(rows[0]);
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>ID</TableCell>
-            <TableCell align="right">First Name</TableCell>
-            <TableCell align="right">Last Name</TableCell>
-            <TableCell align="right">Start Date Time</TableCell>
-            <TableCell align="right">End Date Time</TableCell>
-            <TableCell align="right">Message</TableCell>
-            <TableCell align="right">Notification Type</TableCell>
-            <TableCell align="right">Response</TableCell>
+            {headers.map((header, idx) => (
+              <TableCell align="left" key={idx}>
+                {header}
+              </TableCell>
+            ))}
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell align="right">{row.id}</TableCell>
-              <TableCell align="right">{row.firstName}</TableCell>
-              <TableCell align="right">{row.lastName}</TableCell>
-              <TableCell align="right">{row.startDateTime}</TableCell>
-              <TableCell align="right">{row.endDateTime}</TableCell>
-              <TableCell align="right">{row.message}</TableCell>
-              <TableCell align="right">{row.notificationType}</TableCell>
-              <TableCell align="right">{row.userResponse}</TableCell>
+            <TableRow key={row.id}>
+
+              {fieldNames.map((field, idx) => {
+                return conditional(row[field]) ?
+                  <props.effect text={row[field]} />
+                  :
+                  <TableCell key={idx} align="left">{row[field]}</TableCell>
+              })}
+
             </TableRow>
           ))}
         </TableBody>
@@ -59,3 +56,5 @@ export default function BasicTable() {
     </TableContainer>
   );
 }
+
+// {<TableCell className = {row.user_response==='ACCEPT'? classes.green : row.user_response==='DECLINE'? classes.red : null} align="left">{row.user_response}

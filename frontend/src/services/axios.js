@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const baseURL = "http://localhost:8000/api/v1/";
+const baseURL = "http://64.227.53.237/api/v1/";
 
 const axiosInstance = axios.create({
   baseURL: baseURL,
-  timeout: 5000,
+  timeout: 15000,
   headers: {
     authorization: sessionStorage.getItem("access_token")
       ? "JWT " + sessionStorage.getItem("access_token")
@@ -16,6 +16,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.response.use(
   (response) => {
+    // we need to set state to loggedIn = true
     return response;
   },
   async function (error) {
@@ -27,7 +28,7 @@ axiosInstance.interceptors.response.use(
     }
     if (
       error.response.status === 401 &&
-      originalRequest.url === baseURL + "token/refresh"
+      originalRequest.url === baseURL + "user/token/refresh"
     ) {
       window.location.href = "/login/";
       return Promise.reject(error);
@@ -49,16 +50,16 @@ axiosInstance.interceptors.response.use(
 
         if (tokenParts.exp > now) {
           return axiosInstance
-            .post("/token/refresh", { refresh: refreshToken })
+            .post("user/token/refresh", { refresh: refreshToken })
             .then((response) => {
               sessionStorage.setItem("access_token", response.data.access);
               sessionStorage.setItem("refresh_token", response.data.refresh);
 
-              axiosInstance.defaults.headers["Authorization"] =
+              axiosInstance.defaults.headers["authorization"] =
                 "JWT " + response.data.access;
-              originalRequest.headers["Authorization"] =
+              originalRequest.headers["authorization"] =
                 "JWT " + response.data.access;
-              window.location.reload();
+              // window.location.reload();
 
               return axiosInstance(originalRequest);
             })

@@ -3,14 +3,15 @@ import {
   Button,
   CssBaseline,
   Link,
+  List,
+  ListItem,
+  ListItemText,
   Toolbar,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
-
-
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -22,10 +23,91 @@ const useStyles = makeStyles((theme) => ({
   toolbarTitle: {
     flexGrow: 1,
   },
+  // navbarDisplayFlex: {
+  //   display: `flex`,
+  //   justifyContent: `space-between`
+  // },
+  navDisplayFlex: {
+    display: `flex`,
+    justifyContent: `space-between`,
+  },
+  linkText: {
+    textDecoration: `none`,
+    textTransform: `uppercase`,
+    color: `black`,
+  },
 }));
 
-function Header() {
+function LoginLogout(props) {
+  const classes = props.classes;
+  const loggedIn = props.loggedIn;
+  return loggedIn ? (
+    <Button
+      href="#"
+      color="primary"
+      variant="outlined"
+      className={classes.link}
+      component={NavLink}
+      to="/logout"
+    >
+      Logout
+    </Button>
+  ) : (
+
+      <Button
+        href="#"
+        color="primary"
+        variant="outlined"
+        className={classes.link}
+        component={NavLink}
+        to="/login"
+      >
+        Login
+      </Button>
+    );
+
+}
+
+function checkSessionIfNoLoggedIn(setLoggedIn, setProfile) {
+  const refreshToken = sessionStorage.getItem("refresh_token");
+  const profile = sessionStorage.getItem("profile")
+  if (refreshToken) {
+    const tokenParts = JSON.parse(atob(refreshToken.split(".")[1]));
+    // exp date in token is expressed in seconds, while now() returns milliseconds:
+    const now = Math.ceil(Date.now() / 1000);
+    console.log(refreshToken);
+
+    if (tokenParts.exp > now) {
+      setLoggedIn(true);
+      if(profile){setProfile(JSON.parse(profile))}
+    }
+  }
+}
+
+function Header(props) {
   const classes = useStyles();
+  useEffect(() => {
+    if (!props.loggedIn) {
+      checkSessionIfNoLoggedIn(props.setLoggedIn, props.setProfile);
+    }
+  });
+  const navLinks = [
+    {
+      title: `Notification History`,
+      path: `/notification-history`,
+      viewableByManager: "False", // This doesn't need to be "false" it can be anything besides "True"
+    },
+    { title: `Rotation History`, path: `/rotation`, viewableByManager: "True" },
+    {
+      title: `Start Rotation`,
+      path: `/start-rotation`,
+      viewableByManager: "True",
+    },
+    { title: `Profile`, path: `/profile`, viewableByManager: "False" },
+
+
+  ];
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -51,26 +133,35 @@ function Header() {
               Caller App
             </Link>
           </Typography>
-          <Button
-            href="#"
-            color="primary"
-            variant="outlined"
-            className={classes.link}
-            component={NavLink}
-            to="/login"
+
+          <List
+            component="nav"
+            aria-labelledby="main navigation"
+            className={classes.navDisplayFlex}
           >
-            Login
-          </Button>
-          <Button
-            href="#"
-            color="primary"
-            variant="outlined"
-            className={classes.link}
-            component={NavLink}
-            to="/logout"
-          >
-            Logout
-          </Button>
+            {props.loggedIn
+              ? navLinks.map(({ title, path, viewableByManager }) =>
+                viewableByManager === "all" ||
+
+                  viewableByManager === props.profile.is_manager ? (
+                    <Link
+                      component={NavLink}
+                      to={path}
+                      underline="none"
+                      key={title}
+                      className={classes.linkText}
+                    >
+                      <ListItem button>
+                        <ListItemText primary={title} />
+                      </ListItem>
+                    </Link>
+                  ) : null
+
+              )
+
+              : null}
+          </List>
+          <LoginLogout classes={classes} loggedIn={props.loggedIn} />
         </Toolbar>
       </AppBar>
     </React.Fragment>

@@ -39,11 +39,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Login() {
+export default function Login(props) {
   const classes = useStyles();
   const history = useHistory();
   const [errorMessage, setErrorMessage] = useState("");
-
   return (
     <Formik
       initialValues={{
@@ -70,19 +69,25 @@ export default function Login() {
       onSubmit={(values, { setSubmitting }) => {
         setErrorMessage("");
         axiosInstance
-          .post(`token`, {
+          .post(`user/login`, {
             email: values.email,
             password: values.password,
           })
           .then((res) => {
             sessionStorage.setItem("access_token", res.data.access);
             sessionStorage.setItem("refresh_token", res.data.refresh);
-            axiosInstance.defaults.headers["Authorization"] =
+            axiosInstance.defaults.headers["authorization"] =
               "JWT " + sessionStorage.getItem("access_token");
+            props.setLoggedIn(true);
+          })
+          .then(() => {
+            axiosInstance.get("user/profile").then((data) => {
+              props.setProfile(data.data);
+              sessionStorage.setItem("profile", JSON.stringify(data.data))
+            });
           })
           .then(() => {
             history.push("/");
-            window.location.reload();
           })
           .catch((err) => {
             setErrorMessage("The email and password do not match our records");
@@ -101,7 +106,15 @@ export default function Login() {
               Sign in
             </Typography>
             {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
-            <Form className={classes.form}>
+            <form
+              className={classes.form}
+              onSubmit={submitForm}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  submitForm();
+                }
+              }}
+            >
               <Field
                 component={TextField}
                 name="email"
@@ -135,7 +148,7 @@ export default function Login() {
               >
                 Submit
               </Button>
-            </Form>
+            </form>
           </div>
         </Container>
       )}
