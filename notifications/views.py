@@ -46,7 +46,7 @@ def start_rotation(request):
 @permission_classes([IsAuthenticated])
 def notification_history(request):
     user = request.user
-    notifications = user.notification_set.all()
+    notifications = user.notification_set.all().order_by('-id')
     if len(notifications) > 0:
         notifications = [NotificationSerializer(
             notification).data for notification in notifications]
@@ -58,7 +58,7 @@ def notification_history(request):
 @permission_classes([IsAuthenticated & IsAdminUser])
 def rotation_history(request):
     manager = request.user
-    rotations = manager.rotation_set.all().order_by('id')
+    rotations = manager.rotation_set.all().order_by('-id')
     if len(rotations) > 0:
         serialized_rotations = []
         for rotation in rotations:

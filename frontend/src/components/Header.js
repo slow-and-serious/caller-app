@@ -68,8 +68,9 @@ function LoginLogout(props) {
 
 }
 
-function checkSessionIfNoLoggedIn(setLoggedIn) {
+function checkSessionIfNoLoggedIn(setLoggedIn, setProfile) {
   const refreshToken = sessionStorage.getItem("refresh_token");
+  const profile = sessionStorage.getItem("profile")
   if (refreshToken) {
     const tokenParts = JSON.parse(atob(refreshToken.split(".")[1]));
     // exp date in token is expressed in seconds, while now() returns milliseconds:
@@ -78,6 +79,7 @@ function checkSessionIfNoLoggedIn(setLoggedIn) {
 
     if (tokenParts.exp > now) {
       setLoggedIn(true);
+      if(profile){setProfile(JSON.parse(profile))}
     }
   }
 }
@@ -86,7 +88,7 @@ function Header(props) {
   const classes = useStyles();
   useEffect(() => {
     if (!props.loggedIn) {
-      checkSessionIfNoLoggedIn(props.setLoggedIn);
+      checkSessionIfNoLoggedIn(props.setLoggedIn, props.setProfile);
     }
   });
   const navLinks = [
