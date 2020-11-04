@@ -23,7 +23,11 @@ export default function Rotation() {
 
   useEffect(() => {
     axiosInstance.get("notification/rotation-history").then((data) => {
-      setRows(data.data);
+      const rows = data.data.map((row) => {
+        row["button"] = `/rotation-detail/${row.id}`;
+        return row;
+      });
+      setRows(rows);
       setLoading(false);
     });
   }, []);

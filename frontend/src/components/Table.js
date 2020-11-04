@@ -1,5 +1,5 @@
 import {
-  Button,
+  IconButton,
   Paper,
   Table,
   TableBody,
@@ -8,8 +8,10 @@ import {
   TableHead,
   TableRow,
 } from "@material-ui/core";
+import InfoIcon from "@material-ui/icons/Info";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles({
   table: {
@@ -19,8 +21,8 @@ const useStyles = makeStyles({
     color: "limegreen",
   },
   redText: {
-    color: "red"
-  }
+    color: "red",
+  },
 });
 
 export default function BasicTable(props) {
@@ -32,13 +34,14 @@ export default function BasicTable(props) {
   const classes = useStyles();
   const { rows, headers } = props;
   const fieldNames = Object.keys(rows[0]);
+  console.log(props.rows);
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
             {headers.map((header, idx) => (
-              <TableCell align="left" key={idx}>
+              <TableCell align="center" key={idx}>
                 {header}
               </TableCell>
             ))}
@@ -48,15 +51,36 @@ export default function BasicTable(props) {
           {rows.map((row) => (
             <TableRow key={row.id}>
               {fieldNames.map((field, idx) => {
-                let color = conditional(row[field])
-                return color ? (
-                  <TableCell align="left" className={color === 'green' ? classes.greenText : classes.redText} key={idx}>
+                let color = conditional(row[field]);
+                return field === "button" ? (
+                  <TableCell>
+                    <IconButton
+                      component={NavLink}
+                      to={row["button"]}
+                      size="small"
+                      variant="outlined"
+                      color="primary"
+                    >
+                      <InfoIcon />
+                    </IconButton>
+                  </TableCell>
+                ) : color ? (
+                  <TableCell
+                    align="center"
+                    className={
+                      color === "green" ? classes.greenText : classes.redText
+                    }
+                    key={idx}
+                  >
                     {row[field]}
                   </TableCell>
                 ) : (
-                  <TableCell align="left" key={idx}>{row[field]}</TableCell>
+                  <TableCell align="center" key={idx}>
+                    {row[field]}
+                  </TableCell>
                 );
               })}
+              {/* {row["button"] ? <Button>{row["button"]}</Button> : null} */}
             </TableRow>
           ))}
         </TableBody>
