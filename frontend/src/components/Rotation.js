@@ -18,7 +18,7 @@ export default function Rotation() {
   const [loading, setLoading] = useState(true);
   const classes = useStyles();
 
-  const headers = ["ID", "Date", "Message", "Manager", "Number of calls"];
+  const headers = ["ID", "Date", "Message", "Manager", "Number of calls", "Details"];
   const Loading = LoadingComponent(BasicTable);
 
   useEffect(() => {
