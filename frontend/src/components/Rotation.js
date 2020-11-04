@@ -18,12 +18,16 @@ export default function Rotation() {
   const [loading, setLoading] = useState(true);
   const classes = useStyles();
 
-  const headers = ["ID", "Date", "Message", "Manager", "Number of calls"];
+  const headers = ["ID", "Date", "Message", "Manager", "Number of calls", "Details"];
   const Loading = LoadingComponent(BasicTable);
 
   useEffect(() => {
     axiosInstance.get("notification/rotation-history").then((data) => {
-      setRows(data.data);
+      const rows = data.data.map((row) => {
+        row["button"] = `/rotation-detail/${row.id}`;
+        return row;
+      });
+      setRows(rows);
       setLoading(false);
     });
   }, []);

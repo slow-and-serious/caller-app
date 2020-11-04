@@ -1,4 +1,5 @@
 import {
+  IconButton,
   Paper,
   Table,
   TableBody,
@@ -7,32 +8,42 @@ import {
   TableHead,
   TableRow,
 } from "@material-ui/core";
-import { green, red } from "@material-ui/core/colors";
+import InfoIcon from "@material-ui/icons/Info";
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import CancelIcon from '@material-ui/icons/Cancel';
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
-
+import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
+  greenText: {
+    color: "limegreen",
+  },
+  redText: {
+    color: "red",
+  },
 });
 
 export default function BasicTable(props) {
-  function D() { return false }
-  const conditional = props.conditional || D
-
+  function D() {
+    return false;
+  }
+  const conditional = props.conditional || D;
 
   const classes = useStyles();
   const { rows, headers } = props;
   const fieldNames = Object.keys(rows[0]);
+  console.log(props.rows);
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
             {headers.map((header, idx) => (
-              <TableCell align="left" key={idx}>
+              <TableCell align="center" key={idx}>
                 {header}
               </TableCell>
             ))}
@@ -41,11 +52,36 @@ export default function BasicTable(props) {
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.id}>
-              {fieldNames.map((field) => {
-                return conditional(row[field]) ?
-                <TableCell align="left"><props.effect text={row[field]} /></TableCell>
-                  :
-                  <TableCell align="left">{row[field]}</TableCell>
+              {fieldNames.map((field, idx) => {
+                let color = conditional(row[field]);
+                return field === "button" ? (
+                  <TableCell>
+                    <IconButton
+                      component={NavLink}
+                      to={row["button"]}
+                      size="small"
+                      variant="outlined"
+                      color="primary"
+                    >
+                      <InfoIcon />
+                    </IconButton>
+                  </TableCell>
+                ) : color ? (
+                  <TableCell
+                    align="center"
+                    className={
+                      color === "green" ? classes.greenText : classes.redText
+                    }
+                    key={idx}
+                  >
+                    {color === "green" ? <CheckCircleOutlineIcon /> : <CancelIcon />}
+                    <br /> {row[field]}
+                  </TableCell>
+                ) : (
+                  <TableCell align="center" key={idx}>
+                    {row[field]}
+                  </TableCell>
+                );
               })}
             </TableRow>
           ))}
@@ -54,5 +90,3 @@ export default function BasicTable(props) {
     </TableContainer>
   );
 }
-
-// {<TableCell className = {row.user_response==='ACCEPT'? classes.green : row.user_response==='DECLINE'? classes.red : null} align="left">{row.user_response}

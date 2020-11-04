@@ -16,7 +16,6 @@ const useStyles = makeStyles({
 
 export default function RotationDetail(props) {
   const { id } = useParams();
-  console.log(id);
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(true);
   const classes = useStyles();
@@ -34,6 +33,16 @@ export default function RotationDetail(props) {
   ];
   const Loading = LoadingComponent(BasicTable);
 
+  function conditional(text) {
+    if (text === "ACCEPT") {
+      return "green";
+    } else if (text === "DECLINE") {
+      return "red";
+    } else {
+      return null;
+    }
+  }
+
   useEffect(() => {
     axiosInstance.get(`notification/rotation/${id}`).then((data) => {
       const rows = data.data.map((row) => {
@@ -44,14 +53,19 @@ export default function RotationDetail(props) {
       setRows(rows);
       setLoading(false);
     });
-  }, []);
+  }, [id]);
 
   return (
     <Container>
       <Typography variant="h3" className={classes.header}>
         Rotation Detail
       </Typography>
-      <Loading isLoading={loading} rows={rows} headers={headers} />
+      <Loading
+        isLoading={loading}
+        rows={rows}
+        headers={headers}
+        conditional={conditional}
+      />
     </Container>
   );
 }

@@ -1,16 +1,14 @@
-import withRoot from './withRoot';
-import React from 'react';
+import React from "react";
+import Body from "./Body";
+import HowItWorks from "./HowItWorks";
+import WeServe from "./weServe";
+import withRoot from "./withRoot";
 
-import Body from './Body';
-import HowItWorks from './HowItWorks';
-import WeServe from './weServe';
-
-function Index() {
+function Index(props) {
   return (
     <React.Fragment>
-  
       <Body />
-      <HowItWorks />
+      <HowItWorks loggedIn={props.loggedIn} />
       <WeServe />
     </React.Fragment>
   );
