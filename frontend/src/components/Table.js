@@ -7,7 +7,6 @@ import {
   TableHead,
   TableRow,
 } from "@material-ui/core";
-import { green, red } from "@material-ui/core/colors";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 

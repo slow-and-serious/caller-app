@@ -16,7 +16,6 @@ const useStyles = makeStyles({
 
 export default function RotationDetail(props) {
   const { id } = useParams();
-  console.log(id);
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(true);
   const classes = useStyles();
@@ -44,7 +43,7 @@ export default function RotationDetail(props) {
       setRows(rows);
       setLoading(false);
     });
-  }, []);
+  }, [id]);
 
   return (
     <Container>
