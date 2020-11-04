@@ -9,6 +9,8 @@ import {
   TableRow,
 } from "@material-ui/core";
 import InfoIcon from "@material-ui/icons/Info";
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import CancelIcon from '@material-ui/icons/Cancel';
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import { NavLink } from "react-router-dom";
@@ -72,7 +74,8 @@ export default function BasicTable(props) {
                     }
                     key={idx}
                   >
-                    {row[field]}
+                    {color === "green" ? <CheckCircleOutlineIcon /> : <CancelIcon />}
+                    <br /> {row[field]}
                   </TableCell>
                 ) : (
                   <TableCell align="center" key={idx}>
@@ -80,7 +83,6 @@ export default function BasicTable(props) {
                   </TableCell>
                 );
               })}
-              {/* {row["button"] ? <Button>{row["button"]}</Button> : null} */}
             </TableRow>
           ))}
         </TableBody>
