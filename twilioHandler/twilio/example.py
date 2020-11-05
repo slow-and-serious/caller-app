@@ -1,4 +1,3 @@
-
 from twilio.rest import Client
 from pathlib import Path
 from urllib.parse import urlencode

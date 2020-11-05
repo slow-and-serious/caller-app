@@ -34,7 +34,7 @@ def start_rotation(request):
 
         for user in users:
             Notification.objects.create(
-                user=user, rotation=rotation, notification_type='CALL', user_response='NO RESPONSE')
+                user=user, rotation=rotation, notification_type='CALL', user_response='')
         start_rota(rotation.id)  # called from twilio notification_orchestrator
 
         return Response(rotation.id, status=status.HTTP_200_OK)
