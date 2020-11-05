@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Landing from "./components/Landing";
+import About from "./components/About";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import Landing from "./components/Landing";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
-import Profile from "./components/Profile";
 import Notifications from "./components/Notifications";
+import Profile from "./components/Profile";
 import Rotation from "./components/Rotation";
-import StartRotation from "./components/StartRotation";
 import RotationDetail from "./components/RotationDetail";
-import About from "./components/About";
+import StartRotation from "./components/StartRotation";
 
 function App() {
   const [profile, setProfile] = useState({

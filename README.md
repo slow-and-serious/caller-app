@@ -36,7 +36,7 @@ DB_USER=DB username(see slack)
 DB_PASS=DB password(see slack)  
 DB_HOST=DB host (see slack)  
 DB_PORT=DB port(see slack)  
-CORS_ALLOWED_ORIGINS=make sure to include `http://localhost:3000,http://localhost`
+CORS_ALLOWED_ORIGINS=make sure to include `http://localhost:3000,http://localhost`  
 TWILIO_SID=Twilio credentials  
 TWILIO_AUTH=Twilio credentials  
 TWILIO_NUMBER=Twilio credentials  
@@ -53,16 +53,28 @@ To get the token you will need to use [Google authenticator app](https://support
 | :------------------: | :-------: | :-------: | :-----------------------------------------: |
 |  admin@company.com   | test12345 | superuser |   ![admin_qr](./docs/assets/qr_admin.png)   |
 | manager@company.com  | test12345 |   staff   | ![manager_qr](./docs/assets/qr_manager.png) |
-| leo@company.com   | test12345 |   user    |                     N/A                     |
-| will@company.com | test12345 |   user    |                     N/A                     |
-| joe@company.com | test12345 |   user    |                     N/A                     |
-| lee@company.com | test12345 |   user    |                     N/A                     |
-| rich@company.com | test12345 |   user    |                     N/A                     |
+| leo@company.com      | test12345 |   user    |                     N/A                     |
+| will@company.com     | test12345 |   user    |                     N/A                     |
+| joe@company.com      | test12345 |   user    |                     N/A                     |
+| lee@company.com      | test12345 |   user    |                     N/A                     |
+| rich@company.com     | test12345 |   user    |                     N/A                     |
 
 ## API:
 
 `/` - landing page - serves React frontend app;
 
+
+`login` - login page;  
+`logout` - logout page;  
+`profile` - employee profile page;  
+`about`- about us page;  
+`notification-history` - employee notification history page;  
+`rotation` - rotation history page;  
+`start-rotation` - start rotation page;  
+`rotation-detail/:id` - rotation details page
+
+
+### API Routes:
 `api-auth/` - authorization for browsable API interface;
 
 `api/v1/user/login` - accepts email and password and returns access and refresh JSON Web Tokens;  
