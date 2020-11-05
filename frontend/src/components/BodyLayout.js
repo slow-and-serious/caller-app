@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { withStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
+import { Container, Grid, Typography } from "@material-ui/core";
 
 const styles = (theme) => ({
   root: {
@@ -69,18 +69,16 @@ function BodyLayout(props) {
         <div className={classes.backdrop} />
         <div className={clsx(classes.background, backgroundClassName)} />
       </Container>
-      <Container className={classes.color}>
-        <typography>
-          <h3>
+
+      <Grid container spacing={2} justify="space-evenly">
+        <Grid item xs={12} sm={6} className={classes.color}>
+          <Typography variant="h5" component="h5">
             Welcome to the Caller App an easy solution to notify your employees
-          </h3>
-          <h3>
             of open shifts by seniority level. For info on how this works scroll
-            down{" "}
-          </h3>
-          <h3>to the how it works section.</h3>
-        </typography>
-      </Container>
+            down to the how it works section.
+          </Typography>
+        </Grid>
+      </Grid>
     </section>
   );
 }

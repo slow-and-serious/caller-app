@@ -21,7 +21,6 @@ pytz==2020.1
 qrcode==6.1
 requests==2.24.0
 selenium==3.141.0
-shortuuid==1.0.1
 six==1.15.0
 sqlparse==0.4.1
 toml==0.10.1
