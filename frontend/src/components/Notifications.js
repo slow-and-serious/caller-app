@@ -2,10 +2,9 @@ import { Container, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../services/axios";
-import Green from "./Green";
+// import Green from "./Green";
 import LoadingComponent from "./LoadingLinear";
 import BasicTable from "./Table";
-
 
 const useStyles = makeStyles({
   header: {
@@ -28,7 +27,7 @@ export default function Notifications() {
     "Manager",
     "Notification Type",
     "Message",
-    "Response",
+    "Your Response",
   ];
   const Loading = LoadingComponent(BasicTable);
 
@@ -40,19 +39,27 @@ export default function Notifications() {
     });
   }, []);
 
-  function conditional(text){
-    console.log(text)
-    return text==='ACCEPT'
+  function conditional(text) {
+    if (text === "ACCEPT") {
+      return "green";
+    } else if (text === "DECLINE") {
+      return "red";
+    } else {
+      return null;
+    }
   }
-
-
 
   return (
     <Container>
-
-      <Typography variant="h3" className={classes.header}>Notification History</Typography>
-      <Loading isLoading={loading} rows={rows} headers={headers} effect={Green} conditional={conditional}/>
-
+      <Typography variant="h3" className={classes.header}>
+        Notification History
+      </Typography>
+      <Loading
+        isLoading={loading}
+        rows={rows}
+        headers={headers}
+        conditional={conditional}
+      />
     </Container>
   );
 }

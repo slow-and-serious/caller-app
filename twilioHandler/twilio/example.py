@@ -1,13 +1,13 @@
-
 from twilio.rest import Client
 from pathlib import Path
 from urllib.parse import urlencode
 from server import settings
 
 
-def make_call(call_num, message, id):
+def make_call(call_num, message, _id):
+    print('runing make_call', call_num, message, _id)
     try:
-        message = urlencode({"message": message, "id":id})
+        message = urlencode({"message": message, "id":_id})
         account_sid = settings.TWILIO_SID
         auth_token = settings.TWILIO_AUTH
         base_url = settings.DEPLOYED_URL

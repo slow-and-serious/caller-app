@@ -15,6 +15,7 @@ class PostSerializer(serializers.ModelSerializer):
         
 class RotationSerializer(serializers.ModelSerializer):
     start_date = serializers.DateTimeField(format="%Y-%m-%d %H:%M")
+    manager = serializers.CharField(source='manager.first_name', read_only=True)
     class Meta:
         fields = (
             'id', 'start_date', 'message', 'manager'

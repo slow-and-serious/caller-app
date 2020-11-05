@@ -128,7 +128,7 @@ export default function StartRotation() {
                   disabled={isSubmitting}
                   onClick={submitForm}
                 >
-                  Submit
+                  Notify Employees
                 </Button>
               </Form>
             </div>

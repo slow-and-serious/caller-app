@@ -22,7 +22,7 @@ class Notification(models.Model):
     #      default = shortuuid.uuid(),
     #      editable = False)
     USER_RESPONSE_CHOICES = (
-        ('ACCEPT', 'ACCEPT'), ('DECLINE', 'DECLINE'), ('NO RESPONSE', 'NO RESPONSE'))
+        ('ACCEPT', 'ACCEPT'), ('DECLINE', 'DECLINE'), ('NO RESPONSE', 'NO RESPONSE'), ('', ''))
     NOTIFICATION_TYPE_CHOICES = (('TEXT', 'TEXT'), ('CALL', 'CALL'))
 
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)

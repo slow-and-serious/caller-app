@@ -27,14 +27,14 @@ def login_test(request):
 def start_rotation(request):
     manager = request.user
     users = CustomUser.objects.filter(
-        profile__manager=manager, profile__allow_notifications=True)
+        profile__manager=manager, profile__allow_notifications=True).order_by('id')
     if len(users) > 0:
         message = request.data['message']
         rotation = Rotation.objects.create(message=message, manager=manager)
 
         for user in users:
             Notification.objects.create(
-                user=user, rotation=rotation, notification_type='CALL', user_response='NO RESPONSE')
+                user=user, rotation=rotation, notification_type='CALL', user_response='')
         start_rota(rotation.id)  # called from twilio notification_orchestrator
 
         return Response(rotation.id, status=status.HTTP_200_OK)

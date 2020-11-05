@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'notifications.apps.NotificationsConfig',
 
-    # 3rd party app
+    # 3rd party apps
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
@@ -225,3 +225,7 @@ TWILIO_SID = env("TWILIO_SID")
 TWILIO_AUTH = env("TWILIO_AUTH")
 TWILIO_NUMBER = env("TWILIO_NUMBER")
 DEPLOYED_URL = env("DEPLOYED_URL")
+
+# Background tasks settings
+MAX_RUN_TIME=120
+MAX_ATTEMPTS=1

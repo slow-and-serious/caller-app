@@ -36,7 +36,11 @@ DB_USER=DB username(see slack)
 DB_PASS=DB password(see slack)  
 DB_HOST=DB host (see slack)  
 DB_PORT=DB port(see slack)  
-CORS_ALLOWED_ORIGINS=make sure to include `http://localhost:3000,http://localhost`
+CORS_ALLOWED_ORIGINS=make sure to include `http://localhost:3000,http://localhost`  
+TWILIO_SID=Twilio credentials  
+TWILIO_AUTH=Twilio credentials  
+TWILIO_NUMBER=Twilio credentials  
+DEPLOYED_URL=deployed site URL (for Twilio)
 
 ## 2FA
 
@@ -49,14 +53,28 @@ To get the token you will need to use [Google authenticator app](https://support
 | :------------------: | :-------: | :-------: | :-----------------------------------------: |
 |  admin@company.com   | test12345 | superuser |   ![admin_qr](./docs/assets/qr_admin.png)   |
 | manager@company.com  | test12345 |   staff   | ![manager_qr](./docs/assets/qr_manager.png) |
-| employee@company.com | test12345 |   user    |                     N/A                     |
-| jane.doe@company.com | test12345 |   user    |                     N/A                     |
-| john.doe@company.com | test12345 |   user    |                     N/A                     |
+| leo@company.com      | test12345 |   user    |                     N/A                     |
+| will@company.com     | test12345 |   user    |                     N/A                     |
+| joe@company.com      | test12345 |   user    |                     N/A                     |
+| lee@company.com      | test12345 |   user    |                     N/A                     |
+| rich@company.com     | test12345 |   user    |                     N/A                     |
 
 ## API:
 
 `/` - landing page - serves React frontend app;
 
+
+`login` - login page;  
+`logout` - logout page;  
+`profile` - employee profile page;  
+`about`- about us page;  
+`notification-history` - employee notification history page;  
+`rotation` - rotation history page;  
+`start-rotation` - start rotation page;  
+`rotation-detail/:id` - rotation details page
+
+
+### API Routes:
 `api-auth/` - authorization for browsable API interface;
 
 `api/v1/user/login` - accepts email and password and returns access and refresh JSON Web Tokens;  
@@ -78,14 +96,37 @@ To get the token you will need to use [Google authenticator app](https://support
 [Requirements](./docs/requirements.md)  
 [Project Management](https://github.com/401n1-midterm/penny-pincher/projects/1)
 
-### DB Schema:
+### DB Schema (click to expand):
 
-TBD
+[![ERD Diagram](./docs/assets/ERD.png)](./docs/assets/ERD.png)
 
 ### Dependency Documentation:
 
-TBD
+#### Backend dependencies:
 
-### Dev Dependencies:
+- [Django](https://docs.djangoproject.com/en/3.1/)
+- [Django Rest Framework](https://www.django-rest-framework.org/)
+- [Django Cors-Headers](https://pypi.org/project/django-cors-headers/)
+- [Django Environ](https://pypi.org/project/django-environ/)
+- [Gunicorn](https://pypi.org/project/gunicorn/)
+- [Whitenoise](https://pypi.org/project/whitenoise/)
+- [Psycopg2](https://pypi.org/project/psycopg2/)
+- [Django Rest Framework-Simple JWT](https://pypi.org/project/djangorestframework-simplejwt/)
+- [Autopep8](https://pypi.org/project/autopep8/)
+- [Twilio](https://www.twilio.com/)
+- [Django OTP](https://pypi.org/project/django-otp/)
+- [QR Code](https://pypi.org/project/qrcode/)
+- [Django Phonenumber Field](https://pypi.org/project/django-phonenumber-field/)
+- [Phonenumbers](https://pypi.org/project/phonenumbers/)
+- [Django Background Tasks](https://pypi.org/project/django-background-tasks/)
 
-TBD
+#### Frontend dependencies:
+- [material-ui](https://material-ui.com/getting-started/installation/)
+- [axios](https://www.npmjs.com/package/axios)
+- [formik](https://www.npmjs.com/package/formik)
+- [formik-material-ui](https://www.npmjs.com/package/formik-material-ui)
+- [react](https://www.npmjs.com/package/react)
+- [react-dom](https://www.npmjs.com/package/react-dom)
+- [react-router-dom](https://www.npmjs.com/package/react-router-dom)
+- [react-scripts](https://www.npmjs.com/package/react-scripts)
+
