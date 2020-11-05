@@ -20,6 +20,11 @@ def did_accept(_id):
             return True
         elif notification.user_response == "DECLINE":
             return False
+        else:
+            notification.completed = True
+            notification.user_response = 'NO RESPONSE'
+            notification.save()
+
     except Exception as err:
         print(err)
 
@@ -59,5 +64,5 @@ def start_async_task(phone_number, message, notification_id, rotation_id):
             return "all done"
         else:
             print('inside of did_accept else statement')
-            #start the next caller
+            
             return
