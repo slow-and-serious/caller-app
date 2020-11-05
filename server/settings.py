@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'notifications.apps.NotificationsConfig',
 
-    # 3rd party app
+    # 3rd party apps
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
