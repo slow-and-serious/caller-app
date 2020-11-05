@@ -121,9 +121,7 @@ To get the token you will need to use [Google authenticator app](https://support
 - [Django Background Tasks](https://pypi.org/project/django-background-tasks/)
 
 #### Frontend dependencies:
-- [material-ui/core](https://material-ui.com/getting-started/installation/)
-- [material-ui/icons](https://material-ui.com/getting-started/installation/)
-- [material-ui/lab](https://material-ui.com/getting-started/installation/)
+- [material-ui](https://material-ui.com/getting-started/installation/)
 - [axios](https://www.npmjs.com/package/axios)
 - [formik](https://www.npmjs.com/package/formik)
 - [formik-material-ui](https://www.npmjs.com/package/formik-material-ui)
