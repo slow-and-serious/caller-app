@@ -84,7 +84,7 @@ To get the token you will need to use [Google authenticator app](https://support
 [Requirements](./docs/requirements.md)  
 [Project Management](https://github.com/401n1-midterm/penny-pincher/projects/1)
 
-### DB Schema:
+### DB Schema (click to expand):
 
 [![ERD Diagram](./docs/assets/ERD.png)](./docs/assets/ERD.png)
 
