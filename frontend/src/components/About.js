@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -8,25 +9,30 @@ import Container from '@material-ui/core/Container';
 import Typography from './Typography';
 
 
+
 const styles = (theme) => ({
   root: {
-    display: 'flex',
+    display: "flex",
     // backgroundColor: theme.palette.secondary.light,
+<<<<<<< HEAD
     overflow: 'hidden',
     backgroundColor: 'rgba(0, 0, 0, 0.04)',
+=======
+    overflow: "hidden",
+>>>>>>> c508c6d6bc337c0eb025bae8a993fbe45eee7d43
   },
   container: {
     marginTop: theme.spacing(10),
     marginBottom: theme.spacing(15),
-    position: 'relative',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    position: "relative",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   item: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
     padding: theme.spacing(0, 5),
   },
   title: {
@@ -45,8 +51,8 @@ const styles = (theme) => ({
     marginBottom: theme.spacing(4),
   },
   curvyLines: {
-    pointerEvents: 'none',
-    position: 'absolute',
+    pointerEvents: "none",
+    position: "absolute",
     top: -180,
     opacity: 0.7,
   },
@@ -68,13 +74,19 @@ function ProductHowItWorks(props) {
           className={classes.curvyLines}
           alt="curvy lines"
         />
-        <Typography variant="h4" marked="center" className={classes.title} component="h2">
+        <Typography
+          variant="h4"
+          marked="center"
+          className={classes.title}
+          component="h2"
+        >
           About Us
         </Typography>
         <div>
           <Grid container spacing={5}>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
+<<<<<<< HEAD
               <Typography variant="h4" align="center">
                   Richard
                 </Typography>
@@ -147,6 +159,8 @@ function ProductHowItWorks(props) {
                 <Typography>
                 <a href="https://www.linkedin.com/in/leo-kukharau/"> Linkedin </a>
                 </Typography>
+=======
+>>>>>>> c508c6d6bc337c0eb025bae8a993fbe45eee7d43
                 <img
                   src= {require('../Assets/leo.jpg')} 
                   alt="suitcase"
@@ -161,32 +175,49 @@ function ProductHowItWorks(props) {
             </Grid>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
+<<<<<<< HEAD
     
+=======
+>>>>>>> c508c6d6bc337c0eb025bae8a993fbe45eee7d43
                 <img
                   src= {require('../Assets/codefellows.png')} 
                   alt="graph"
                   className={classes.image}
                 />
+<<<<<<< HEAD
                 <Typography variant="h5" align="center" >
                   
+=======
+                <Typography variant="h5" align="center">
+                  First come, first served. Our offers are in limited
+                  quantities, so be quick.
+>>>>>>> c508c6d6bc337c0eb025bae8a993fbe45eee7d43
                 </Typography>
               </div>
             </Grid>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
+<<<<<<< HEAD
               <Typography variant="h4" align="center">
                   Joe
                 </Typography>
                 <Typography>
                 <a href="https://www.linkedin.com/in/joseph-lee-600599b9"> Linkedin </a>
                 </Typography>
+=======
+>>>>>>> c508c6d6bc337c0eb025bae8a993fbe45eee7d43
                 <img
                   src={require('../Assets/joe2.jpeg')} 
                   alt="clock"
                   className={classes.image}
                 />
                 <Typography variant="h5" align="center">
+<<<<<<< HEAD
                 Python developer and marine corps veteran of four years. Former truck driver with a passion in building software to improve trucking logistics.
+=======
+                  {"New offers every week. New experiences, new surprises. "}
+                  {"Your Sundays will no longer be alike."}
+>>>>>>> c508c6d6bc337c0eb025bae8a993fbe45eee7d43
                 </Typography>
               </div>
             </Grid>

@@ -5,7 +5,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
-import Profile from "./components/Profile"
+import Profile from "./components/Profile";
 import Notifications from "./components/Notifications";
 import Rotation from "./components/Rotation";
 import StartRotation from "./components/StartRotation";
@@ -22,8 +22,12 @@ function App() {
   return (
     <Router>
       <React.StrictMode>
-
-        <Header profile={profile} loggedIn={loggedIn} setLoggedIn={setLoggedIn} setProfile={setProfile}/>
+        <Header
+          profile={profile}
+          loggedIn={loggedIn}
+          setLoggedIn={setLoggedIn}
+          setProfile={setProfile}
+        />
 
         <Switch>
           <Route
@@ -33,9 +37,9 @@ function App() {
           />
           <Route
             exact
-            path="/About"
+            path="/about"
             component={() => <About loggedIn={loggedIn} />}
-          /> 
+          />
           <Route exact path="/notification-history" component={Notifications} />
           <Route
             exact
@@ -51,13 +55,13 @@ function App() {
           />
           <Route
             exact
-
             path="/profile"
-            component={() => <Profile profile={profile} setProfile={setProfile} />}
+            component={() => (
+              <Profile profile={profile} setProfile={setProfile} />
+            )}
           />
           <Route
             exact
-
             path="/rotation"
             component={() => <Rotation loggedIn={loggedIn} profile={profile} />}
           />
