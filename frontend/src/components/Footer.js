@@ -38,7 +38,7 @@ function Copyright() {
 const footers = [
   {
     title: "Company",
-    description: ["Team", "History", "Contact us", "Locations"],
+    description: ["About" , "History", "Contact us", "Locations"],
   },
   {
     title: "Features",
@@ -79,7 +79,7 @@ function Footer() {
               <ul>
                 {footer.description.map((item) => (
                   <li key={item}>
-                    <Link href="#" variant="subtitle1" color="textSecondary">
+                    <Link href={`/${item}`} variant="subtitle1" color="textSecondary">
                       {item}
                     </Link>
                   </li>
