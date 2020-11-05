@@ -49,13 +49,13 @@ export default function Profile(props) {
       validate={(values) => {
         const errors: Partial<Values> = {};
         if (!values.phone_number) {
-          errors.phone_number = "xxx-xxx-xxxx";
+          errors.phone_number = "Cannot be blank";
         } else if (
-          !/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im.test(
+          !/^\+\d{11}$/im.test(
             values.phone_number
           )
         ) {
-          errors.phone_number = "Invalid Phone Number";
+          errors.phone_number = "Please use the format +12223334444";
         }
         return errors;
       }}

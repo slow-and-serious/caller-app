@@ -27,7 +27,7 @@ export default function Notifications() {
     "Manager",
     "Notification Type",
     "Message",
-    "Response",
+    "Your Response",
   ];
   const Loading = LoadingComponent(BasicTable);
 

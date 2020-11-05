@@ -9,8 +9,8 @@ import {
   TableRow,
 } from "@material-ui/core";
 import InfoIcon from "@material-ui/icons/Info";
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
-import CancelIcon from '@material-ui/icons/Cancel';
+import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
+import CancelIcon from "@material-ui/icons/Cancel";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import { NavLink } from "react-router-dom";
@@ -24,6 +24,9 @@ const useStyles = makeStyles({
   },
   redText: {
     color: "red",
+  },
+  headerText: {
+    fontWeight: "bold",
   },
 });
 
@@ -43,7 +46,11 @@ export default function BasicTable(props) {
         <TableHead>
           <TableRow>
             {headers.map((header, idx) => (
-              <TableCell align="center" key={idx}>
+              <TableCell
+                align="center"
+                key={idx}
+                className={classes.headerText}
+              >
                 {header}
               </TableCell>
             ))}
@@ -74,7 +81,11 @@ export default function BasicTable(props) {
                     }
                     key={idx}
                   >
-                    {color === "green" ? <CheckCircleOutlineIcon /> : <CancelIcon />}
+                    {color === "green" ? (
+                      <CheckCircleOutlineIcon />
+                    ) : (
+                      <CancelIcon />
+                    )}
                     <br /> {row[field]}
                   </TableCell>
                 ) : (
